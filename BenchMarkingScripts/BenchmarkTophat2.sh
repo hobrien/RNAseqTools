@@ -39,6 +39,21 @@ then
     fi    
 fi
 
+if [ ! -f ~/RNAseqTools/BenchMarks/Tophat2_flagstat.txt ]   
+then
+    echo "Running samtools flagstat Tophat2 mapping"
+    samtools flagstat -n $BASEDIR/Tophat2/accepted_hits.bam \
+      > ~/RNAseqTools/BenchMarks/Tophat2_flagstat.txt
+    if [ $? -eq 0 ]
+    then
+        echo "Finished running samtools flagstat on Tophat mapping "
+    else
+        echo "samtools flagstat could not be run on tophat mapping"
+        exit 1
+    fi    
+fi
+
+
 if [ ! -f $BASEDIR/Tophat2/accepted_hits_nsort.bam ]   
 then
     echo "Sorting Tophat2 mapping"
@@ -62,7 +77,7 @@ then
       > ~/RNAseqTools/BenchMarks/Tophat2_counts.txt
     if [ $? -eq 0 ]
     then
-        echo "Finished running htseq-count sorted Tophat mapping "
+        echo "Finished running htseq-count on sorted Tophat mapping "
     else
         echo "htseq-count could not be run on sorted tophat mapping"
         exit 1
