@@ -9,8 +9,6 @@ export PATH=/share/apps/R-3.2.2/bin:/share/apps/:$PATH
 
 BASEDIR=~/Benchmark
 # see http://www.tldp.org/LDP/LG/issue18/bash.html for bash Parameter Substitution
-echo "Starting mapping for $SampleID"
-mkdir /c8000xd3/rnaseq-heath/Mappings/$SampleID
 if [ ! -d $BASEDIR/Tophat2 ]
 then
     echo "Making Tophat2 folder"
@@ -22,7 +20,7 @@ then
         echo "Could not create Tophat2 folder"
         exit 1
     fi    
-Fi
+fi
     
 if [ ! -f $BASEDIR/Tophat2/accepted_hits.bam  ] || [ ! -f $BASEDIR/Tophat2/unmapped.bam ]   
 then
