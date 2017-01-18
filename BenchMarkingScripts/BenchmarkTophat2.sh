@@ -42,7 +42,7 @@ fi
 if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_flagstat.txt ]   
 then
     echo "Running samtools flagstat $MAPPER mapping"
-    samtools flagstat -n $BASEDIR/accepted_hits.bam \
+    samtools flagstat $BASEDIR/accepted_hits.bam \
       > ~/RNAseqTools/BenchMarks/${MAPPER}_flagstat.txt
     if [ $? -eq 0 ]
     then
