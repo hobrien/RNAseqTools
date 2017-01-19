@@ -26,7 +26,7 @@ fi
 if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt ]   
 then
     echo "Running $MAPPER mapping"
-    /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt tophat --keep-fasta-order --library-type fr-secondstrand --num-threads 8 \
+    /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt tophat --mate-inner-dist 500 --mate-std-dev 50 --library-type fr-secondstrand --num-threads 8 \
       --transcriptome-index /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/genes.inx \
       --output-dir $BASEDIR \
       /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Sequence/Bowtie2Index/genome \

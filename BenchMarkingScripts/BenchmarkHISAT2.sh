@@ -37,12 +37,29 @@ then
     fi    
 fi
 
-   
+if [ ! -f /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/splicesites.txt ]
+then
+    echo "Making list of known splice sites"
+    hisat2_extract_splice_sites.py \
+      /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/genes.gtf \
+      > /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/splicesites.txt
+    if [ $? -eq 0 ]
+    then
+        echo "Finished making list of known splice sites"
+    else
+        echo "Making list of known splice sites failed"
+        exit 1
+    fi    
+fi
+
+      
+
 if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt ]   
 then
     echo "Running $MAPPER mapping"
-    /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt hisat2 --rf --threads 8 \
+    /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt hisat2 --fr --threads 8 \
       -x $REF/genome \
+      --known-splicesite-infile /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/splicesites.txt \
       -1 ~/Benchmark/FastQ/test_R1.fastq.gz -2 ~/Benchmark/FastQ/test_R2.fastq.gz \
       | samtools view -S -bo $BASEDIR/accepted_hits.bam -
     if [ $? -eq 0 ]
