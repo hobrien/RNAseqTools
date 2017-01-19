@@ -1,0 +1,23 @@
+	Command being timed: "tophat --mate-inner-dist 500 --mate-std-dev 50 --library-type fr-secondstrand --num-threads 8 --transcriptome-index /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/genes.inx --output-dir /home/mpmho/Benchmark/Tophat2 /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Sequence/Bowtie2Index/genome /home/mpmho/Benchmark/FastQ/test_R1.fastq.gz /home/mpmho/Benchmark/FastQ/test_R2.fastq.gz"
+	User time (seconds): 4910.32
+	System time (seconds): 279.51
+	Percent of CPU this job got: 328%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 26:18.15
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3738372
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 56
+	Minor (reclaiming a frame) page faults: 6997689
+	Voluntary context switches: 2880208
+	Involuntary context switches: 512135
+	Swaps: 0
+	File system inputs: 4402808
+	File system outputs: 2055928
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
