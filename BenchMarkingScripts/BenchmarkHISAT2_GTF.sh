@@ -7,7 +7,7 @@
 #
 
 export PATH=/share/apps/R-3.2.2/bin:/share/apps/:$PATH
-MAPPER=HISAT2
+MAPPER=HISAT2_GTF
 BASEDIR=~/Benchmark/$MAPPER
 REF=/c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Sequence/WholeGenomeFasta
 # see http://www.tldp.org/LDP/LG/issue18/bash.html for bash Parameter Substitution
@@ -59,6 +59,7 @@ then
     echo "Running $MAPPER mapping"
     /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt hisat2 --fr --threads 8 \
       -x $REF/genome \
+      --known-splicesite-infile /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/splicesites.txt \
       -1 ~/Benchmark/FastQ/test_R1.fastq.gz -2 ~/Benchmark/FastQ/test_R2.fastq.gz \
       | samtools view -S -bo $BASEDIR/accepted_hits.bam -
     if [ $? -eq 0 ]
