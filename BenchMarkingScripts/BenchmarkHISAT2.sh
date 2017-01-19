@@ -54,16 +54,15 @@ then
     fi    
 fi
 
-if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_flagstat.txt ]   
+if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_stats.txt ]   
 then
-    echo "Running samtools flagstat $MAPPER mapping"
-    samtools flagstat $BASEDIR/accepted_hits.bam \
-      > ~/RNAseqTools/BenchMarks/${MAPPER}_flagstat.txt
+    echo "Running RSeQC stats on $MAPPER mapping"
+   bam_stat.py -i $BASEDIR/accepted_hits.bam > ~/RNAseqTools/BenchMarks/${MAPPER}_stats.txt
     if [ $? -eq 0 ]
     then
-        echo "Finished running samtools flagstat on $MAPPER mapping "
+        echo "Finished running RSeQC stats on $MAPPER mapping "
     else
-        echo "samtools flagstat could not be run on $MAPPER mapping"
+        echo "RSeQC stats could not be run on $MAPPER mapping"
         exit 1
     fi    
 fi
