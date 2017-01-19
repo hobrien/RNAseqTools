@@ -3,6 +3,7 @@
 #$ -cwd
 #$ -j y
 #$ -S /bin/bash
+#$ -pe smp 8
 #
 
 export PATH=/share/apps/R-3.2.2/bin:/share/apps/:$PATH
@@ -23,14 +24,15 @@ then
     fi    
 fi
 
-if [ ! -f $REF/genome.1.ht2 ] & [ ! -f $REF/genome.1.ht21 ]
+if [ ! -f $REF/genome.1.ht2 ] && [ ! -f $REF/genome.1.ht21 ]
 then
-    echo "Running $MAPPER mapping"
-    hisat2-build $REF/genome.fa $REF/genome
+    echo "Building index for $MAPPER"
+    hisat2-build -p 8 $REF/genome.fa $REF/genome
+    if [ $? -eq 0 ]
     then
-        echo "Finished $MAPPER mapping "
+        echo "Finished building index for $MAPPER"
     else
-        echo "$MAPPER mapping failed"
+        echo "Building index for $MAPPER failed"
         exit 1
     fi    
 fi
@@ -40,9 +42,9 @@ if [ ! -f ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt ]
 then
     echo "Running $MAPPER mapping"
     /usr/bin/time -v -o ~/RNAseqTools/BenchMarks/${MAPPER}_time.txt hisat2 --rf --threads 8 \
-      -x $REF/genome
-      --output-dir $BASEDIR \
-      -1 ~/Benchmark/FastQ/test_R1.fastq.gz -2 ~/Benchmark/FastQ/test_R2.fastq.gz 
+      -x $REF/genome \
+      -1 ~/Benchmark/FastQ/test_R1.fastq.gz -2 ~/Benchmark/FastQ/test_R2.fastq.gz \
+      | samtools view -S -bo $BASEDIR/accepted_hits.bam -
     if [ $? -eq 0 ]
     then
         echo "Finished $MAPPER mapping "
