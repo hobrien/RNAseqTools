@@ -1,4 +1,4 @@
-## Tool for RNAseq Analyses
+## Tools for RNAseq Analyses
 
 This is basically a list of resources that I have put together as a reference for my own research, but I'm publishing it here on the off chance that it might help others
 
@@ -8,3 +8,4 @@ This is basically a list of resources that I have put together as a reference fo
 - [Quantification Tools]({{ site.baseurl }}/Quantification)
 - [Normalization Methods]({{ site.baseurl }}/Normalization)
 - [Differential Expression]({{ site.baseurl }}/DE)
+- [Workflow Tutorials]({{ site.baseurl }}/Workflow)
