@@ -39,3 +39,4 @@ Benchmarking/Logs/*
 
 # Snakemake files
 .snakemake
+dag.svg
