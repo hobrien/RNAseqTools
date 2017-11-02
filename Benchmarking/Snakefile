@@ -20,7 +20,8 @@ rule hisat:
     output:
         "{mapping_folder}/{sample}.bam"
     params:
-        index = config["index"]
+        index = config["index"],
+        num_cores = 8
     log:
         "Logs/{mapping_folder}/{sample}_hisat_map.txt"
     shell:
