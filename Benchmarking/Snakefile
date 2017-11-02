@@ -1,4 +1,4 @@
-#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -maxvmem {cluster.maxvmem}" -j 20
+#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -l h_vmem={cluster.maxvmem}" -j 20
 
 import os
 # read config info into this namespace
@@ -38,7 +38,7 @@ rule hisat:
     input:
         reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
     output:
-        "{mapping_folder}/{sample}.bam"
+        temp("{mapping_folder}/{sample}.bam")
     params:
         idx = config["index"],
         extra = '--known-splicesite-infile ' + config["splice_sites"]
