@@ -1,4 +1,4 @@
-#snakemake --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
+#snakemake --conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
 
 import os
 # read config info into this namespace
@@ -14,34 +14,33 @@ rule all:
         
 rule hisat:
     input:
-        forward = lambda wildcards: config["samples"][wildcards.sample]['forward'],
-        reverse = lambda wildcards: config["samples"][wildcards.sample]['reverse'],
-        splice_sites = config["splice_sites"]
+        reads = [lambda wildcards: config["samples"][wildcards.sample]['forward'], lambda wildcards: config["samples"][wildcards.sample]['reverse']]
     output:
         "{mapping_folder}/{sample}.bam"
     params:
-        index = config["index"],
-        num_cores = 8
+        idx = config["index"],
+        extra = '--known-splicesite-infile ' + config["splice_sites"]
     log:
         "Logs/{mapping_folder}/{sample}_hisat_map.txt"
-    shell:
-        "(hisat2 --fr --threads {params.num_cores} -x {params.index} --known-splicesite-infile "
-        "{input.splice_sites} -1 {input.forward} -2 {input.reverse} | samtools view "
-        "-S -bo {output} -) 2> {log}"
+    threads: 8                          # optional, defaults to 1
+    wrapper:
+      "0.17.4/bio/hisat2"
 
 rule sort_bam:
     input:
         rules.hisat.output
     output:
         "{mapping_folder}/{sample}.sort.bam"
-    shell:
-        "samtools sort -o {output} {input}"
-
+    params:
+        "-m 4G"
+    threads: 8
+    wrapper:
+        "0.17.4/bio/samtools/sort"
+        
 rule samtools_index:
     input:
         rules.sort_bam.output
     output:
         "{mapping_folder}/{sample}.sort.bam.bai"
-    shell:
-        "samtools index {input}"
-
+    wrapper:
+        "0.17.4/bio/samtools/index"
