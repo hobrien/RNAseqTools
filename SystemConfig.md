@@ -13,7 +13,7 @@
     - [Anaconda scientific python stack](https://docs.anaconda.com/anaconda/packages/pkg-docs): numpy, scipy, pandas, matplotlib, seaborn, etc
     - [r-essentials](https://conda.io/docs/user-guide/tasks/use-r-with-conda.html): "Anaconda for R"
     - [Bioconda](https://bioconda.github.io): bioinformatics-specific python packages (biopython, pysam, etc) + other bioinformatics tools (bwa, samtools, etc)
-    - [condafordge](https://conda-forge.org): community contributed packages (*proceed with caution!*)
+    - [condaforge](https://conda-forge.org): community contributed packages (*proceed with caution!*)
 
 ### Setting up your environment
 - Copy executables to ~/bin
@@ -137,3 +137,6 @@
 - [conda myths and misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions)
 - [why I promote conda](http://technicaldiscovery.blogspot.co.uk/2013/12/why-i-promote-conda.html)
 - [a tmux crash course](https://robots.thoughtbot.com/a-tmux-crash-course)
+
+<br>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">System Configuration</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Heath O'Brien</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
