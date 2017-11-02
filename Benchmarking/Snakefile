@@ -1,5 +1,6 @@
 #snakemake --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
 
+import os
 # read config info into this namespace
 configfile: "config.yaml"
 
@@ -9,7 +10,7 @@ rule all:
     input:
         expand("Hisat/{sample}.sort.bam.bai", sample=config["samples"]),
         expand("Hisat/{sample}.sort.bam", sample=config["samples"]),
-        "R/BamQC.pdf"
+        os.path.join(config['mappings'], "BamQC.pdf")
         
 rule hisat:
     input:
