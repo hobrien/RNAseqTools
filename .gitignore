@@ -35,3 +35,6 @@ vignettes/*.pdf
 # Output from scripts
 Benchmarking/Hisat/*
 Benchmarking/Logs/*
+
+# Snakemake files
+.snakemake
