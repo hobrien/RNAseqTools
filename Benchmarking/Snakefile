@@ -8,8 +8,8 @@ include: "bamQC"
 
 rule all:
     input:
-        expand("Hisat/{sample}.sort.bam.bai", sample=config["samples"]),
-        expand("Hisat/{sample}.sort.bam", sample=config["samples"]),
+        expand("{mapping_folder}/{sample}.sort.bam.bai", mapping_folder=config['mappings'], sample=config["samples"]),
+        expand("{mapping_folder}/{sample}.sort.bam", mapping_folder=config['mappings'], sample=config["samples"]),
         os.path.join(config['mappings'], "BamQC.pdf")
         
 rule hisat:
@@ -18,11 +18,11 @@ rule hisat:
         reverse = lambda wildcards: config["samples"][wildcards.sample]['reverse'],
         splice_sites = config["splice_sites"]
     output:
-        "Hisat/{sample}.bam"
+        "{mapping_folder}/{sample}.bam"
     params:
         index = config["index"]
     log:
-        "Logs/Hisat/{sample}_hisat_map.txt"
+        "Logs/{mapping_folder}/{sample}_hisat_map.txt"
     shell:
         "(hisat2 --fr --threads {params.num_cores} -x {params.index} --known-splicesite-infile "
         "{input.splice_sites} -1 {input.forward} -2 {input.reverse} | samtools view "
@@ -32,7 +32,7 @@ rule sort_bam:
     input:
         rules.hisat.output
     output:
-        "Hisat/{sample}.sort.bam"
+        "{mapping_folder}/{sample}.sort.bam"
     shell:
         "samtools sort -o {output} {input}"
 
@@ -40,7 +40,7 @@ rule samtools_index:
     input:
         rules.sort_bam.output
     output:
-        "Hisat/{sample}.sort.bam.bai"
+        "{mapping_folder}/{sample}.sort.bam.bai"
     shell:
         "samtools index {input}"
 
