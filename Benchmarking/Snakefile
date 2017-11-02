@@ -20,6 +20,8 @@ rule hisat:
     params:
         idx = config["index"],
         extra = '--known-splicesite-infile ' + config["splice_sites"]
+    benchmark:
+        "Benchmarks/{sample}.bwa.benchmark.txt"
     log:
         "Logs/{mapping_folder}/{sample}_hisat_map.txt"
     threads: 8                          # optional, defaults to 1
