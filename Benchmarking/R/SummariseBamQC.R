@@ -22,7 +22,7 @@ RSeQCstats <- mutate(RSeQCstats, V2=as.numeric(V2))
 RSeQCstats <- spread(RSeQCstats, V1, V2)
 ReadNumbers <- RSeQCstats[,c(1,4)]
 RSeQCstats <- RSeQCstats[c(1,4,3,2)]
-write_tsv(RSeQCstats, file.path(outFolder, "Tables/read_numbers.txt"))
+write_tsv(RSeQCstats, file.path(outFolder, "read_numbers.txt"))
 
 # read_distribution.py
 RSeQCdistribution <- data.frame()
@@ -51,7 +51,7 @@ RSeQCdistribution <- RSeQCdistribution[c(1,5,3,4,2,6)]
 RSeQCdistribution <- RSeQCdistribution %>% mutate(sample = str_extract(sample, "^[^-]+")) %>% 
   group_by(sample) %>% 
   summarise_all("sum")
-write_tsv(RSeQCdistribution, file.path(outFolder, "Tables/read_distribution.txt"))
+write_tsv(RSeQCdistribution, file.path(outFolder, "read_distribution.txt"))
 
 #infer_experiment.py
 RSeQCexpt <- data.frame()
@@ -66,7 +66,7 @@ for (file in dir(folder, '*expt.txt')) {
 RSeQCexpt <- spread(RSeQCexpt, V1, V2)
 # This assumes the same number of reads from each lane, which isn't true but is probably close enough
 RSeQCexpt <- RSeQCexpt %>% mutate(sample = str_extract(sample, "^[^-]+")) %>% group_by(sample) %>% summarise_each("mean")
-write_tsv(RSeQCexpt, file.path(outFolder, "Tables/read_strand.txt"))
+write_tsv(RSeQCexpt, file.path(outFolder, "read_strand.txt"))
 
 #inner_distance.py
 RSeQCdistance <- data.frame()
@@ -82,7 +82,7 @@ for (file in dir(folder, '*.inner_distance_freq.txt')) {
 RSeQCdistance <- RSeQCdistance %>% mutate(sample = str_extract(sample, "^[^-]+"), 
                                           size = (V1+V2)/2) %>% 
   group_by(sample, size) %>% summarise(count=sum(V3))
-write_tsv(RSeQCdistance, file.path(outFolder, "Tables/read_distance.txt"))
+write_tsv(RSeQCdistance, file.path(outFolder, "read_distance.txt"))
 
 #junction_saturation.py
 RSeQCsat <- data.frame()
@@ -97,4 +97,4 @@ for (file in dir(folder, '*.junctionSaturation_plot.r')) {
   temp$sample <- sample
   RSeQCsat <- rbind(RSeQCsat, temp)
 }
-write_tsv(RSeQCsat, file.path(outFolder, "Tables/junction_sat.txt"))
+write_tsv(RSeQCsat, file.path(outFolder, "junction_sat.txt"))

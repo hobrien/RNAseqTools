@@ -78,7 +78,7 @@ rule summarise_qc:
         expand("{mapping_folder}/{sample}.junctionSaturation_plot.r", mapping_folder=config['mappings'], sample=config['samples']),
         expand("{mapping_folder}/{sample}.cov.txt", mapping_folder=config['mappings'], sample=config['samples'])
     output:
-        expand("{mapping_folder}/Tables/{table}.txt", mapping_folder=config['mappings'], table=["read_numbers", "read_distribution", "read_strand", "read_distance", "junction_sat"])
+        expand("{mapping_folder}/Summary/{table}.txt", mapping_folder=config['mappings'], table=["read_numbers", "read_distribution", "read_strand", "read_distance", "junction_sat"])
     params:    
         stats_folder=config['mappings'],
         summary_folder=os.path.join(config['mappings'], "Summary")
