@@ -1,0 +1,50 @@
+#snakemake --cluster "qsub -pe smp {params.num_cores}" -j 20
+
+# read config info into this namespace
+configfile: "config.yaml"
+
+include: "bamQC"
+
+rule all:
+    input:
+        expand("Hisat/{sample}.sort.bam.bai", sample=config["samples"]),
+        expand("Hisat/{sample}.sort.bam", sample=config["samples"]),
+        "R/BamQC.pdf"
+        
+rule hisat:
+    input:
+        forward = lambda wildcards: config["samples"][wildcards.sample]['forward'],
+        reverse = lambda wildcards: config["samples"][wildcards.sample]['reverse'],
+        splice_sites = config["splice_sites"]
+    output:
+        "Hisat/{sample}.bam"
+    params:
+        num_cores = 8,
+        index = config["index"]
+    log:
+        "Logs/Hisat/{sample}_hisat_map.txt"
+    shell:
+        "(hisat2 --fr --threads {params.num_cores} -x {params.index} --known-splicesite-infile "
+        "{input.splice_sites} -1 {input.forward} -2 {input.reverse} | samtools view "
+        "-S -bo {output} -) 2> {log}"
+
+rule sort_bam:
+    input:
+        rules.hisat.output
+    output:
+        "Hisat/{sample}.sort.bam"
+    params:
+         num_cores = 1
+    shell:
+        "samtools sort -o {output} {input}"
+
+rule samtools_index:
+    input:
+        rules.sort_bam.output
+    output:
+        "Hisat/{sample}.sort.bam.bai"
+    params:
+         num_cores = 1
+    shell:
+        "samtools index {input}"
+

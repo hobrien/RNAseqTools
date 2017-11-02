@@ -1,0 +1,116 @@
+    
+rule bam_stats:
+    input:
+        bam="Hisat/{sample}.sort.bam",
+        index="Hisat/{sample}.sort.bam.bai"
+    output:
+        "Mappings/{sample}.stats.txt"
+    params:
+         num_cores = 1
+    shell:
+        "bam_stat.py -i {input.bam} > {output}"
+
+rule bam_dist:
+    input:
+        bam="config['mappings']/{sample}.sort.bam",
+        index="config['mappings']/{sample}.sort.bam.bai",
+        bed=config["bed_file"]
+    output:
+        "config['mappings']/{sample}.dist.txt"
+    params:
+         num_cores = 1
+    log:
+        "Logs/BamQC/{sample}_dist.txt"
+    shell:
+        "(read_distribution.py -r {input.bed} -i {input.bam} > {output}) 2> {log}"
+
+rule bam_strand:
+    input:
+        bam="config['mappings']/{sample}.sort.bam",
+        index="config['mappings']/{sample}.sort.bam.bai",
+        bed=config["bed_file"]
+    output:
+        "config['mappings']/{sample}.expt.txt"
+    params:
+         num_cores = 1
+    log:
+        "Logs/BamQC/{sample}_expt.txt"
+    shell:
+        "(infer_experiment.py -r {input.bed} -i {input.bam} > {output}) 2> {log}"
+
+rule bam_inner_dist:
+    input:
+        bam="config['mappings']/{sample}.sort.bam",
+        index="config['mappings']/{sample}.sort.bam.bai",
+        bed=config["bed_file"]
+    output:
+        "config['mappings']/{sample}.inner_distance_freq.txt"
+    params:
+         num_cores = 1,
+         prefix = "Mappings/{sample}"
+    log:
+        "Logs/BamQC/{sample}_inner_dist.txt"
+    shell:
+        "(inner_distance.py -r {input.bed} -i {input.bam} -o {params.prefix} -u 1000 -s 10) 2>{log}"
+
+rule bam_junction_sat:
+    input:
+        bam="config['mappings']/{sample}.sort.bam",
+        index="config['mappings']/{sample}.sort.bam.bai",
+        bed=config["bed_file"]
+    output:
+        "config['mappings']/{sample}.junctionSaturation_plot.r"
+    params:
+         num_cores = 1,
+         prefix = "Mappings/{sample}"
+    log:
+        "Logs/BamQC/{sample}_junction_sat.txt"
+    shell:
+        "(junction_saturation.py -r {input.bed} -i {input.bam} -o {params.prefix}) 2>{log}"
+
+rule bam_cov:
+    input:
+        bam="config['mappings']/{sample}.sort.bam",
+        index="config['mappings']/{sample}.sort.bam.bai",
+    output:
+        "config['mappings']/{sample}.cov.txt"
+    params:
+         num_cores = 1,
+    shell:
+        "/c8000xd3/rnaseq-heath/bin/samtools idxstats {input.bam} > {output}"
+    
+rule summarise_qc:
+    input:
+        expand("{mapping_folder}/{sample}.stats.txt", mapping_folder=config['mappings'], sample=config['samples']),
+        expand("{mapping_folder}/{sample}.dist.txt", mapping_folder=config['mappings'], sample=config['samples']),
+        expand("{mapping_folder}/{sample}.expt.txt", mapping_folder=config['mappings'], sample=config['samples']),
+        expand("{mapping_folder}/{sample}.inner_distance_freq.txt", mapping_folder=config['mappings'], sample=config['samples']),
+        expand("{mapping_folder}/{sample}.junctionSaturation_plot.r", mapping_folder=config['mappings'], sample=config['samples']),
+        expand("{mapping_folder}/{sample}.cov.txt", mapping_folder=config['mappings'], sample=config['samples'])
+    output:
+        "Tables/read_numbers.txt",
+        "Tables/read_distribution.txt",
+        "Tables/read_strand.txt",
+        "Tables/read_distance.txt",
+        "Tables/junction_sat.txt"
+    params:
+        num_cores=1,
+        stats_folder="Mappings"
+    log:
+        "Logs/BamQC/summarise_qc.txt"
+    shell:
+        "(Rscript R/SummariseBamQC.R {params.stats_folder}) 2> {log}"
+
+rule qc_report:
+    input:
+        "Tables/read_numbers.txt",
+        "Tables/read_distribution.txt",
+        "Tables/read_strand.txt",
+        "Tables/read_distance.txt",
+        "Tables/junction_sat.txt"
+    output:
+        "R/BamQC.pdf"
+    params:
+         num_cores = 1
+    shell:
+        "Rscript -e 'library(rmarkdown); render(\"R/BamQC.Rmd\")'"
