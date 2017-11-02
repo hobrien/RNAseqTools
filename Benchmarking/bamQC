@@ -78,11 +78,7 @@ rule summarise_qc:
         expand("{mapping_folder}/{sample}.junctionSaturation_plot.r", mapping_folder=config['mappings'], sample=config['samples']),
         expand("{mapping_folder}/{sample}.cov.txt", mapping_folder=config['mappings'], sample=config['samples'])
     output:
-        "Tables/read_numbers.txt",
-        "Tables/read_distribution.txt",
-        "Tables/read_strand.txt",
-        "Tables/read_distance.txt",
-        "Tables/junction_sat.txt"
+        expand({mapping_folder}/Tables/{table}.txt", mapping_folder=config['mappings'], table=["read_numbers", "read_distribution", "read_strand", "read_distance", "junction_sat"])
     params:    
         stats_folder=config['mappings']
     log:
@@ -91,12 +87,7 @@ rule summarise_qc:
         "(Rscript R/SummariseBamQC.R {params.stats_folder}) 2> {log}"
 
 rule qc_report:
-    input:
-        "Tables/read_numbers.txt",
-        "Tables/read_distribution.txt",
-        "Tables/read_strand.txt",
-        "Tables/read_distance.txt",
-        "Tables/junction_sat.txt"
+    input: rules.summarise_qc.output
     output:
         "R/BamQC.pdf"
     shell:
