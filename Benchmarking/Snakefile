@@ -10,8 +10,30 @@ rule all:
     input:
         expand("{mapping_folder}/{sample}.sort.bam.bai", mapping_folder=config['mappings'], sample=config["samples"]),
         expand("{mapping_folder}/{sample}.sort.bam", mapping_folder=config['mappings'], sample=config["samples"]),
-        os.path.join(config['mappings'], "BamQC.pdf")
-        
+        os.path.join(config['mappings'], "BamQC.pdf"),
+        "FastQC/{sample}_R1.html",
+        "FastQC/{sample}_R2.html",
+
+rule fastqc1:
+    input:
+        lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')[0]
+    output:
+        html="FastQC/{sample}_R1.html",
+        zip="FastQC/{sample}_R1.zip"
+    params: ""
+    wrapper:
+        "0.17.4/bio/fastqc"
+
+rule fastqc2:
+    input:
+        lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')[1]
+    output:
+        html="FastQC/{sample}_R2.html",
+        zip="FastQC/{sample}_R2.zip"
+    params: ""
+    wrapper:
+        "0.17.4/bio/fastqc"
+       
 rule hisat:
     input:
         reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
@@ -21,7 +43,7 @@ rule hisat:
         idx = config["index"],
         extra = '--known-splicesite-infile ' + config["splice_sites"]
     benchmark:
-        "Benchmarks/{sample}.bwa.benchmark.txt"
+        "Benchmarks/{sample}.hisat.benchmark.txt"
     log:
         "Logs/{mapping_folder}/{sample}_hisat_map.txt"
     threads: 8                          # optional, defaults to 1
