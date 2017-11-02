@@ -9,6 +9,17 @@ output:
 <!-- type Rscript -e "library(rmarkdown); render('BamQC.rmd')" to knit to html on the server -->
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo = FALSE)
+
+# set a default repository for packages                         
+local({r <- getOption('repos')                                                                                                                                
+      r['CRAN'] <- 'http://www.stats.bris.ac.uk/R/'                                                                                                          
+      options(repos=r)                    
+}) 
+
+if(!require(tufte)) {
+    install.packages("tufte", dependencies=T)
+}
+
 library(tidyverse)
 library(stringr)
 library(gridExtra)
