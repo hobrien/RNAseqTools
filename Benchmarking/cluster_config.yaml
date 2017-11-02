@@ -7,6 +7,6 @@ hisat:
 fastqc1:
     num_cores: 1
     maxvmem: 8G
-fastqc1:
+fastqc2:
     num_cores: 1
     maxvmem: 8G
