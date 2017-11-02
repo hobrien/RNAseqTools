@@ -1,4 +1,4 @@
-#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
+#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -maxvmem {cluster.maxvmem}" -j 20
 
 import os
 # read config info into this namespace
@@ -11,8 +11,8 @@ rule all:
         expand("{mapping_folder}/{sample}.sort.bam.bai", mapping_folder=config['mappings'], sample=config["samples"]),
         expand("{mapping_folder}/{sample}.sort.bam", mapping_folder=config['mappings'], sample=config["samples"]),
         os.path.join(config['mappings'], "BamQC.pdf"),
-        "FastQC/{sample}_R1.html",
-        "FastQC/{sample}_R2.html",
+        expand("FastQC/{sample}_R1.html", sample=config["samples"]),
+        expand("FastQC/{sample}_R2.html", sample=config["samples"])
 
 rule fastqc1:
     input:
