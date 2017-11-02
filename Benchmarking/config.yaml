@@ -1,7 +1,6 @@
 samples:
     test: 
-        forward: Benchmark/FastQ/test_R1.fastq.gz
-        reverse: Benchmark/FastQ/test_R2.fastq.gz
+        reads: FastQ/test_R1.fastq.gz,FastQ/test_R2.fastq.gz
 mappings: Hisat
 splice_sites: /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Annotation/Genes.gencode/splicesites.txt
 index: /c8000xd3/rnaseq-heath/Ref/Homo_sapiens/GRCh38/NCBI/GRCh38Decoy/Sequence/WholeGenomeFasta/genome

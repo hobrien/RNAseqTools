@@ -1,4 +1,4 @@
-#snakemake --conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
+#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
 
 import os
 # read config info into this namespace
@@ -14,7 +14,7 @@ rule all:
         
 rule hisat:
     input:
-        reads = [lambda wildcards: config["samples"][wildcards.sample]['forward'], lambda wildcards: config["samples"][wildcards.sample]['reverse']]
+        reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
     output:
         "{mapping_folder}/{sample}.bam"
     params:
