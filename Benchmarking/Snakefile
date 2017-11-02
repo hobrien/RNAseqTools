@@ -1,4 +1,4 @@
-#snakemake --cluster "qsub -pe smp {params.num_cores}" -j 20
+#snakemake --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores}" -j 20
 
 # read config info into this namespace
 configfile: "config.yaml"
@@ -19,7 +19,6 @@ rule hisat:
     output:
         "Hisat/{sample}.bam"
     params:
-        num_cores = 8,
         index = config["index"]
     log:
         "Logs/Hisat/{sample}_hisat_map.txt"
@@ -33,8 +32,6 @@ rule sort_bam:
         rules.hisat.output
     output:
         "Hisat/{sample}.sort.bam"
-    params:
-         num_cores = 1
     shell:
         "samtools sort -o {output} {input}"
 
@@ -43,8 +40,6 @@ rule samtools_index:
         rules.sort_bam.output
     output:
         "Hisat/{sample}.sort.bam.bai"
-    params:
-         num_cores = 1
     shell:
         "samtools index {input}"
 

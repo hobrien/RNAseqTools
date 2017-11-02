@@ -1,24 +1,20 @@
     
 rule bam_stats:
     input:
-        bam="Hisat/{sample}.sort.bam",
-        index="Hisat/{sample}.sort.bam.bai"
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai"
     output:
-        "Mappings/{sample}.stats.txt"
-    params:
-         num_cores = 1
+        "{mapping_folder}/{sample}.stats.txt"
     shell:
         "bam_stat.py -i {input.bam} > {output}"
 
 rule bam_dist:
     input:
-        bam="config['mappings']/{sample}.sort.bam",
-        index="config['mappings']/{sample}.sort.bam.bai",
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai",
         bed=config["bed_file"]
     output:
-        "config['mappings']/{sample}.dist.txt"
-    params:
-         num_cores = 1
+        "{mapping_folder}/{sample}.dist.txt"
     log:
         "Logs/BamQC/{sample}_dist.txt"
     shell:
@@ -26,13 +22,11 @@ rule bam_dist:
 
 rule bam_strand:
     input:
-        bam="config['mappings']/{sample}.sort.bam",
-        index="config['mappings']/{sample}.sort.bam.bai",
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai",
         bed=config["bed_file"]
     output:
-        "config['mappings']/{sample}.expt.txt"
-    params:
-         num_cores = 1
+        "{mapping_folder}/{sample}.expt.txt"
     log:
         "Logs/BamQC/{sample}_expt.txt"
     shell:
@@ -40,14 +34,13 @@ rule bam_strand:
 
 rule bam_inner_dist:
     input:
-        bam="config['mappings']/{sample}.sort.bam",
-        index="config['mappings']/{sample}.sort.bam.bai",
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai",
         bed=config["bed_file"]
     output:
-        "config['mappings']/{sample}.inner_distance_freq.txt"
+        "{mapping_folder}/{sample}.inner_distance_freq.txt"
     params:
-         num_cores = 1,
-         prefix = "Mappings/{sample}"
+         prefix = "{mapping_folder}/{sample}"
     log:
         "Logs/BamQC/{sample}_inner_dist.txt"
     shell:
@@ -55,14 +48,13 @@ rule bam_inner_dist:
 
 rule bam_junction_sat:
     input:
-        bam="config['mappings']/{sample}.sort.bam",
-        index="config['mappings']/{sample}.sort.bam.bai",
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai",
         bed=config["bed_file"]
     output:
-        "config['mappings']/{sample}.junctionSaturation_plot.r"
+        "{mapping_folder}/{sample}.junctionSaturation_plot.r"
     params:
-         num_cores = 1,
-         prefix = "Mappings/{sample}"
+         prefix = "{mapping_folder}/{sample}"
     log:
         "Logs/BamQC/{sample}_junction_sat.txt"
     shell:
@@ -70,12 +62,10 @@ rule bam_junction_sat:
 
 rule bam_cov:
     input:
-        bam="config['mappings']/{sample}.sort.bam",
-        index="config['mappings']/{sample}.sort.bam.bai",
+        bam="{mapping_folder}/{sample}.sort.bam",
+        index="{mapping_folder}/{sample}.sort.bam.bai",
     output:
-        "config['mappings']/{sample}.cov.txt"
-    params:
-         num_cores = 1,
+        "{mapping_folder}/{sample}.cov.txt"
     shell:
         "/c8000xd3/rnaseq-heath/bin/samtools idxstats {input.bam} > {output}"
     
@@ -93,9 +83,8 @@ rule summarise_qc:
         "Tables/read_strand.txt",
         "Tables/read_distance.txt",
         "Tables/junction_sat.txt"
-    params:
-        num_cores=1,
-        stats_folder="Mappings"
+    params:    
+        stats_folder=config['mappings']
     log:
         "Logs/BamQC/summarise_qc.txt"
     shell:
@@ -110,7 +99,5 @@ rule qc_report:
         "Tables/junction_sat.txt"
     output:
         "R/BamQC.pdf"
-    params:
-         num_cores = 1
     shell:
         "Rscript -e 'library(rmarkdown); render(\"R/BamQC.Rmd\")'"

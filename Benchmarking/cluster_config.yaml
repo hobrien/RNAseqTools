@@ -1,0 +1,6 @@
+__default__:
+    num_cores: 1
+    maxvmem: 4G
+hisat:
+    num_cores: 1
+    maxvmem: 4G
