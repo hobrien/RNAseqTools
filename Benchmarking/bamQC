@@ -1,3 +1,4 @@
+from snakemake.utils import R
     
 rule bam_stats:
     input:
@@ -100,6 +101,18 @@ rule summarise_qc:
         "envs/r.yaml"
     shell:
         "(Rscript R/SummariseBamQC.R {params.stats_folder} {params.summary_folder}) 2> {log}"
+
+rule install_packages:
+    input:
+        rules.summarise_qc.output
+    run:
+        R("""local({r <- getOption('repos')                                                                                                                                
+                    r['CRAN'] <- 'http://www.stats.bris.ac.uk/R/'                                                                                                          
+                    options(repos=r)                    
+                  }) 
+             if(!require(tufte)) {
+                install.packages("tufte", dependencies=T)
+             }""")
 
 rule qc_report:
     input: 
