@@ -102,18 +102,6 @@ rule summarise_qc:
     shell:
         "(Rscript R/SummariseBamQC.R {params.stats_folder} {params.summary_folder}) 2> {log}"
 
-rule install_packages:
-    input:
-        rules.summarise_qc.output
-    run:
-        R("""local({r <- getOption('repos')                                                                                                                                
-                    r['CRAN'] <- 'http://www.stats.bris.ac.uk/R/'                                                                                                          
-                    options(repos=r)                    
-                  }) 
-             if(!require(tufte)) {
-                install.packages("tufte", dependencies=T)
-             }""")
-
 rule qc_report:
     input: 
         rules.summarise_qc.output
@@ -124,4 +112,5 @@ rule qc_report:
     conda:
         "envs/r.yaml"
     shell:
+        "Rscript R/InstallPackages.R; "
         "Rscript -e \"library(rmarkdown); folder<-'../{params.summary_folder}'; render('R/BamQC.Rmd', 'tufte_handout', '../{output}')\""
