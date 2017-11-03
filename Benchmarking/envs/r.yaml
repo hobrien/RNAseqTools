@@ -127,6 +127,7 @@ dependencies:
 - r-glmnet=2.0_13=r342h0aac7f1_0
 - r-glue=1.1.1=r342h3154e12_0
 - r-gower=0.1.2=r342h54e18f5_0
+- r-gridextra=2.3=r342hfc66463_0
 - r-gtable=0.2.0=r342h8e3b2c8_0
 - r-haven=1.1.0=r342h8909e7d_0
 - r-hexbin=1.27.1=r342h72fd8d9_4
