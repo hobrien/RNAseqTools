@@ -52,12 +52,12 @@
 - Conflicts look like this:
 
     ```
-        <<<<<<<<<<<< HEAD
-        local version of code
-        =============
-        remote version
-        >>>>>>>>>>>> origin/master
-        ```
+    <<<<<<<<<<<< HEAD
+    local version of code
+    =============
+    remote version
+    >>>>>>>>>>>> origin/master
+    ```
 
 - Edit file to include whatever parts from the local and remote versions you please (and remove markers added by Git)
 - Return to GitHub Desktop, commit changes, and redo sync
@@ -75,9 +75,8 @@
 - After clicking on "Publish", the "Sync" button will come back and any changes made to your files will not conflict with changes on the master version on the server
 - You can now use the drop down menu in the upper left to switch between brances, which will automatically change the code in your folder
 - By some black magic, this changes the files that are available in the finder
-- When you are ready to merge branches back together, you need to make a Pull request, then go to the online version and confirm the request
-- There is a Pull request button in GitHub Desktop, but it's probably easier to do it all online
-- If there are conflicts, they can be resolved as above
+- When you are ready to merge branches back together, return to master, click on ```compare``` then select the branch you want to merge from, and click on ```Update from ...```
+- It's usually a good idea to merge from master to your new branch and resolve any conflicts, then merge back into master
 
 ### Using git from the command line 
 - Copy project url and clone locally:
