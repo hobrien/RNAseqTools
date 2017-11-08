@@ -1,6 +1,6 @@
 ### Contents
 - [System Configuration]({{ site.baseurl }}/WorkflowTutorial/SystemConfig)
-- [Version Control]({{ site.baseurl }}/WorkflowTutorial/VersionControl)
+- [Version Control]({{ site.baseurl }}/WorkflowTutorial/GitIntro)
 - [Snakemake]({{ site.baseurl }}/WorkflowTutorial/Snakemake)
 - [Databases]({{ site.baseurl }}/WorkflowTutorial/Databases)
 - [Shiny]({{ site.baseurl }}/WorkflowTutorial/Shiny)
