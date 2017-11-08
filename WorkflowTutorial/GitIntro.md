@@ -78,32 +78,20 @@
 
 ### Using git from the command line 
 - Copy project url and clone locally:
-
-    ```git clone https://github.com/hobrien/RNAseqTools.git```
-
+    - ```git clone https://github.com/hobrien/RNAseqTools.git```
 - List modified files:
-
-    ```git status -s```
-
+    - ```git status -s```
 - Add changes to project:
-
-    ```git add FILENAME```
-    ```git commit -m "initial commit"```
-
+    - ```git add FILENAME```
+    - ```git commit -m "initial commit"```
     - can also commit without -m flag, which opens the commit message in your text editor of choice
 - Update local version with remote changes:
-
-    ```git pull```
-
+    - ```git pull```
 - Update remote repo with local committed changes:
-
-    ```git push```
+    - ```git push```
     - always sync in this order
-
 - Undo changes to a file:
-
-    ```git checkout -- FILENAME```
-
+    - ```git checkout -- FILENAME```
 - Create new branch:
     - ```git branch -b Version2```
 - Switch branches:
