@@ -80,24 +80,39 @@
 - Copy project url and clone locally:
 
     ```git clone https://github.com/hobrien/RNAseqTools.git```
+
 - List modified files:
+
     ```git status -s```
+
 - Add changes to project:
+
     ```git add FILENAME```
     ```git commit -m "initial commit"```
+
     - can also commit without -m flag, which opens the commit message in your text editor of choice
 - Update local version with remote changes:
+
     ```git pull```
+
 - Update remote repo with local committed changes:
+
     ```git push```
     - always sync in this order
+
 - Undo changes to a file:
+
     ```git checkout -- FILENAME```
+
 - Create new branch:
+
     ```git branch -b Version2```
+
 - Switch branches:
+
     ```git checkout master```
 - Merge branches:
+
     ```git merge Version2```
     ```git branch -d Version2```
 
