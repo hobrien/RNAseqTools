@@ -9,13 +9,13 @@
 - GitHub is a free service, but normally requires that all code to be publicly available (private repos are available for academic use)
     - this isn't normally a problem, though you'll want to ensure that your **data** are not included in the repository
 
-### The preferred workflow for Git
-<div style='width:450px'>
-</div>
+### [The preferred workflow for Git](http://nvie.com/posts/a-successful-git-branching-model)
+<div style='width:150px'>
 
 ![GitFlow Branching Model](http://nvie.com/img/git-model@2x.png)
+</div>
 
-### A realistic workflow for Git
+### [A realistic workflow for Git](https://xkcd.com/1597)
 
 ![XKCD Branching Model](http://imgs.xkcd.com/comics/git.png)
 
@@ -47,7 +47,7 @@
 - To sync local copy to remote server:
     - Click "Sync"
 
-### Resolving conflicts:
+### Resolving conflicts
 - If sync fails because changes on remote server can't be automatically merged with local changes, open file in your text editor and edit conflicts manually
 - Conflicts look like this:
 
@@ -63,7 +63,7 @@
 - Return to GitHub Desktop, commit changes, and redo sync
 - If all else fails, save local files in another location, delete the project, clone fresh copy from server, then add back in your local changes
     
-### Working with branches:
+### [Working with branches](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 - I usually don't bother creating additional branches beyond the local and remote master versions
 - If multiple people are working on the same project, it's nice if they can work on the same files independently without having to merge everything together each time they make a commit
     - This can acomplished by creating seperate branches for each person, then merging everything together once everyone has completed their part of the project
