@@ -22,28 +22,28 @@
     - Available from https://desktop.github.com
     - Create [GitHub](github.com) account and log into GitHub Desktop using these credentials
 - Adding an Existing Project:
-    - Click on project selector in upper right corner of GitHub Desktop and select "New Project"
-    - Click on "Existing Directory" and navigate to folder, then click "Select Folder" and "Create Project"
-    - Click on + in upper left corner of GitHub Desktop, then "Create"
-    - Navigate to folder and click OK
+    - Click on project selector in upper right corner of GitHub Desktop and select ```New Project```
+    - Click on ```Existing Directory``` and navigate to folder, then click ```Select Folder``` and ```Create Project```
+    - Click on ```+``` in upper left corner of GitHub Desktop, then ```Create```
+    - Navigate to folder and click ```OK```
     - Give repository a name and create (note that redundant names in different locations on your file system will clash on the server)
 - Starting from Scratch:
-    - Click on project selector in upper right corner of GitHub Desktop and select "New Project"
-    - Click on "New Directory", then "Empty Project", then pick a project name and location
-    - Click on + in upper left corner of GitHub Desktop, then "Create"
-    - Navigate to folder and click OK
+    - Click on project selector in upper right corner of GitHub Desktop and select ```New Project```
+    - Click on ```New Directory```, then ```Empty Project```, then pick a project name and location
+    - Click on ```+``` in upper left corner of GitHub Desktop, then ```Create```
+    - Navigate to folder and click ```OK```
     - Give repository a name and create
 - To make changes to the repo:
-    - Click on "Changes" at top of window
+    - Click on ```Changes``` at top of window
     - Select files to add
     - Write summary of changes and (optional) description
-    - Click "commit to master"
+    - Click ```commit to master```
 - To revert changes:
-    - Click on "History" at top of window
+    - Click on ```History``` at top of window
     - Navigate through commits to find the offending edit (deletions are marked red, additions are green)
-    - Click on "Revert"
+    - Click on ```Revert```
 - To sync local copy to remote server:
-    - Click "Sync"
+    - Click ```Sync```
 
 ### Resolving conflicts
 - If sync fails because changes on remote server can't be automatically merged with local changes, open file in your text editor and edit conflicts manually
@@ -66,18 +66,19 @@
 - If multiple people are working on the same project, it's nice if they can work on the same files independently without having to merge everything together each time they make a commit
     - This can acomplished by creating seperate branches for each person, then merging everything together once everyone has completed their part of the project
 - Can also be useful to "snapshot" your project, eg; when submitting for publication
-- Create a new branch by clicking on the "Create new branch" is in the upper left, next to the "master" dropdown menu
-- Give your branch a name and click OK
+- Create a new branch by clicking on the ```Create new branch``` is in the upper left, next to the ```master``` dropdown menu
+- Give your branch a name and click ```OK```
 - Any changes will now be confined to your new branch
-- The "Sync" button will now be replaced by a "Publish" button because there is no copy of your new branch on the server to sync to
-- After clicking on "Publish", the "Sync" button will come back and any changes made to your files will not conflict with changes on the master version on the server
-- You can now use the drop down menu in the upper left to switch between brances, which will automatically change the code in your folder
+- The ```Sync``` button will now be replaced by a ```Publish``` button because there is no copy of your new branch on the server to sync to
+- After clicking on ```Publish```, the ```Sync``` button will come back and any changes made to your files will not conflict with changes on the master version on the server
+- You can now use the drop down menu in the upper left to switch between branches, which will automatically change the code in your folder
 - By some black magic, this changes the files that are available in the finder
 - When you are ready to merge branches back together, return to master, click on ```compare``` then select the branch you want to merge from, and click on ```Update from ...```
 - It's usually a good idea to merge from master to your new branch and resolve any conflicts, then merge back into master
 
 ### Using git from the command line 
 - Copy project url and clone locally:
+
     ```git clone https://github.com/hobrien/RNAseqTools.git```
 - List modified files:
     ```git status -s```
