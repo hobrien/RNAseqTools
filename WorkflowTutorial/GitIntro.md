@@ -50,6 +50,7 @@
 ### Resolving conflicts:
 - If sync fails because changes on remote server can't be automatically merged with local changes, open file in your text editor and edit conflicts manually
 - Conflicts look like this:
+
     ```
         <<<<<<<<<<<< HEAD
         local version of code
@@ -57,6 +58,7 @@
         remote version
         >>>>>>>>>>>> origin/master
         ```
+
 - Edit file to include whatever parts from the local and remote versions you please (and remove markers added by Git)
 - Return to GitHub Desktop, commit changes, and redo sync
 - If all else fails, save local files in another location, delete the project, clone fresh copy from server, then add back in your local changes
@@ -97,6 +99,9 @@
     ```git branch -b Version2```
 - Switch branches:
     ```git checkout master```
+- Merge branches:
+    ```git merge Version2```
+    ```git branch -d Version2```
 
 ### A few additional considerations
 - Bookmarking snapshots (example: the version used for the analyses in a paper submission)
