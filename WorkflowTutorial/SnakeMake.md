@@ -19,3 +19,15 @@
     - Supports config files to abstract details of pipeline from inputs and outputs
     - Include python code within pipeline
     
+- params.num_cores vs. [cluster.num_cores](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
+- includes
+- [wrappers](https://snakemake-wrappers.readthedocs.io/en/stable)
+- dag
+- benchmarks
+- conda env
+- [R](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r)
+- Scripts
+
+- [Star source code](https://github.com/alexdobin/STAR/tree/master/source)
+
+[Pipeline framework review](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbw020)
