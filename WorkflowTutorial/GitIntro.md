@@ -112,9 +112,8 @@
 
     ```git checkout master```
 - Merge branches:
-
-    ```git merge Version2```
-    ```git branch -d Version2```
+    - ```git merge Version2```
+     -```git branch -d Version2```
 
 ### A few additional considerations
 - Bookmarking snapshots (example: the version used for the analyses in a paper submission)
