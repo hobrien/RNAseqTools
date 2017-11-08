@@ -111,6 +111,7 @@
         - Give release a name (unfortunately only names like "v1.0" are supported)
         - Click on ```This is a pre-release``` if it's not the final version of the paper, then on ```Publish release```
         - This will automatically create a ziped version of all the code that can be navigated to by clicking on the ```1 release``` button for the project
+
 - Excluding private files
     - When you initialise a repo, a .gitignore file will automatically be created with a list of files that will never be synced to the server
     - Files on the list will not show up on the lists of modified files to add to a commit
@@ -119,16 +120,19 @@
         - If you do this with genome-scale files, it will break *everything*
         - It's also not trivial to delete files from [github](github.com) once you've committed them, because git wants to keep a record of all changes made to all files
     - Of course, any files that are not part of the repo will need to be synced some other way
+
 - README, LICENSE
     - When a repo is created online, you have the option of creating a README.md file that is displayed automatically on the landing page for your project
     - If you are creating a repo locally, you'd need to do this manually with a text editor
     - You are also given the option of adding a license to the repo, though the available options are tailored to software (I would suggest using the Creative Commons [CC-BY](https://creativecommons.org/licenses/by/2.0/uk/legalcode) license for most biology projects)
+
 - Meta-notebooks
     - Notes can be organised in a logical order, without interleaving unrelated work that was done on the same day
     - Commit history preserves a chronological record
     - Additional explanation, comments, etc can be recorded in commit message without cluttering notes
     - If you're fortunate enough to have lab mentors, they can easily review your notes and leave comments
     - If using the free version of GitHub, you may need to be a bit coy about exactly what you are working on to prevent your competetors from stealing you work
+
 - Using Git for manuscript writing
     - Can be used to avoid this:
     
