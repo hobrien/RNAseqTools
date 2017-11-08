@@ -10,10 +10,8 @@
     - this isn't normally a problem, though you'll want to ensure that your **data** are not included in the repository
 
 ### [The preferred workflow for Git](http://nvie.com/posts/a-successful-git-branching-model)
-<div style='width:150px'>
 
 ![GitFlow Branching Model](http://nvie.com/img/git-model@2x.png)
-</div>
 
 ### [A realistic workflow for Git](https://xkcd.com/1597)
 
