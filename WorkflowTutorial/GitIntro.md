@@ -106,11 +106,11 @@
     - Make a note the number of the last commit before submission (eg; ce289b3)
     - Create a separate branch for each submission
     - Tag commit
-        - Go online and click on the "0 releases" button beneath the project description
-        - Click on "Create a new release"
+        - Go online and click on the ```0 releases``` button beneath the project description
+        - Click on ```Create a new release```
         - Give release a name (unfortunately only names like "v1.0" are supported)
-        - Click on "This is a pre-release" if it's not the final version of the paper, then on "Publish release"
-        - This will automatically create a ziped version of all the code that can be navigated to by clicking on the "1 release" button for the project
+        - Click on ```This is a pre-release``` if it's not the final version of the paper, then on ```Publish release```
+        - This will automatically create a ziped version of all the code that can be navigated to by clicking on the ```1 release``` button for the project
 - Excluding private files
     - When you initialise a repo, a .gitignore file will automatically be created with a list of files that will never be synced to the server
     - Files on the list will not show up on the lists of modified files to add to a commit
