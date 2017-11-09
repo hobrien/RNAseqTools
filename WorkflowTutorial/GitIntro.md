@@ -91,7 +91,7 @@
 ### Forking
 - You can clone projects created by other people using ```git clone```, or by downloading a zip file, but if you want to add it to GitHub Desktop, you need to ```fork``` it
 - This creates a copy that is owned by you which you can modify however you want
-- If you think your changes might be useful to users fo the original code, you can submit a ```pull request```
+- If you think your changes might be useful to users of the original code, you can submit a ```pull request```
 - If the owner of the original project agrees that your changes are an improvement, they can accept, which merges your code into theirs
 - You can also merge modifications of the original code (or other forked versions) into your fork
 
@@ -122,7 +122,7 @@
 ### A few additional considerations
 - SSH keys
     - If you are going to be pushing changes to GitHub from the command line often, it's a good idea to create an SSH key and add it to GitHub so that you don't have to enter your password every time
-    - Scroll to the bottom of [here]({{ site.baseurl }}/WorkflowTutorial/SystemConfig) to see how to generate an ssh key
+    - See [here]({{ site.baseurl }}/WorkflowTutorial/SystemConfig#ssh_key) to see how to generate an ssh key
     - On GitHub, go to ```Settings``` and click on ```SSH and GPG keys```
     - Type in a descriptive name for your computer and paste in your public key
     - You'll also need to set your git user name:
