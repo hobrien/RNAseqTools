@@ -127,7 +127,7 @@
     - ```tmux attach -t GENEX-FB1```
     - ```tmux switch -t GENEX-FB2```
 
-### <a name="ssh_key"></a>Avoiding passwords
+### Avoiding passwords
 - [ssh key pairs](http://www.linuxproblem.org/art_9.html) can be used to authenticate server connections:
     - ```ssh-keygen -t rsa```
     - ```ssh mpmho@ravenlogin.arcca.cf.ac.uk mkdir -p .ssh```
