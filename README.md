@@ -10,8 +10,11 @@ This is basically a list of resources that I have put together as a reference fo
 - [Normalization Methods]({{ site.baseurl }}/Methods/Normalization)
 - [Batch Correction]({{ site.baseurl }}/Methods/BatchCorreection)
 - [Differential Expression]({{ site.baseurl }}/Methods/DE)
+- [Differential Splicing]({{ site.baseurl }}/Methods/Splicing)
+- [eQTL Analyses]({{ site.baseurl }}/Methods/eQTL)
+- [Pathway Analyses]({{ site.baseurl }}/Methods/Pathways)
 
-### Other resources
+### Other Resources
 - [GTEx Publications]({{ site.baseurl }}/Resources/GTExPapers)
 - [Brain Gene Expression Resources]({{ site.baseurl }}/Resources/BrainExpression)
 
