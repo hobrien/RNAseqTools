@@ -88,6 +88,13 @@
 - When you are ready to merge branches back together, return to master, click on ```compare``` then select the branch you want to merge from, and click on ```Update from ...```
 - It's usually a good idea to merge from master to your new branch and resolve any conflicts, then merge back into master
 
+### Forking
+- You can clone projects created by other people using ```git clone```, or by downloading a zip file, but if you want to add it to GitHub Desktop, you need to ```fork``` it
+- This creates a copy that is owned by you which you can modify however you want
+- If you think your changes might be useful to users fo the original code, you can submit a ```pull request```
+- If the owner of the original project agrees that your changes are an improvement, they can accept, which merges your code into theirs
+- You can also merge modifications of the original code (or other forked versions) into your fork
+
 ### Using git from the command line 
 - Copy project url and clone locally:
     - ```git clone https://github.com/hobrien/RNAseqTools.git```
