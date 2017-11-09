@@ -17,10 +17,22 @@
 
 ![XKCD Branching Model](http://imgs.xkcd.com/comics/git.png)
 
+### Setup
+- Create [GitHub](github.com) account and initialise a new project with ```README.md``` file
+- Click on ```clone or download``` and copy url
+- Open terminal and clone project:
+    - ```git clone URL```
+- Open ```README.md``` in text editor, modify and save
+- Commit changes to repo and sync:
+    - ```git add README.md```
+    - ```git commit -m "First commit"```
+    - ```git push```
+- Your changes should be visible in your GitHub project after you refresh
+
 ### Working with GitHub Desktop
 - Installing GitHub Desktop:
     - Available from https://desktop.github.com
-    - Create [GitHub](github.com) account and log into GitHub Desktop using these credentials
+    - Log into GitHub Desktop using your GitHub credentials
 - Adding an Existing Project:
     - Click on project selector in upper right corner of GitHub Desktop and select ```New Project```
     - Click on ```Existing Directory``` and navigate to folder, then click ```Select Folder``` and ```Create Project```
