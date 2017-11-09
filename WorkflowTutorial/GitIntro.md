@@ -122,7 +122,7 @@
 ### A few additional considerations
 - SSH keys
     - If you are going to be pushing changes to GitHub from the command line often, it's a good idea to create an SSH key and add it to GitHub so that you don't have to enter your password every time
-    - See [here]({{ site.baseurl }}/WorkflowTutorial/SystemConfig#ssh_key) to see how to generate an ssh key
+    - See [here]({{ site.baseurl }}/WorkflowTutorial/SystemConfig#avoiding-passwords) to see how to generate an ssh key
     - On GitHub, go to ```Settings``` and click on ```SSH and GPG keys```
     - Type in a descriptive name for your computer and paste in your public key
     - You'll also need to set your git user name:
