@@ -1,0 +1,2 @@
+# de-novo transcript assembly
+-Kim, C. S., Winn, M. D., Sachdeva, V., & Jordan, K. E. (2017). K-mer clustering algorithm using a MapReduce framework: application to the parallelization of the Inchworm module of Trinity. [BMC Bioinformatics, 18(1), 467](http://doi.org/10.1186/s12859-017-1881-8)
