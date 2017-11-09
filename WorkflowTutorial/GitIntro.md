@@ -120,6 +120,14 @@
     - ```git branch -d Version2```
 
 ### A few additional considerations
+- SSH keys
+    - If you are going to be pushing changes to GitHub from the command line often, it's a good idea to create an SSH key and add it to GitHub so that you don't have to enter your password every time
+    - Scroll to the bottom of [here]({{ site.baseurl }}/WorkflowTutorial/SystemConfig) to see how to generate an ssh key
+    - On GitHub, go to ```Settings``` and click on ```SSH and GPG keys```
+    - Type in a descriptive name for your computer and paste in your public key
+    - You'll also need to set your git user name:
+        - ```git config --global user.name USERNAME```
+        
 - Bookmarking snapshots (example: the version used for the analyses in a paper submission)
     - Make zipped copy of directory
     - Make a note the number of the last commit before submission (eg; ce289b3)
