@@ -8,7 +8,7 @@ This is basically a list of resources that I have put together as a reference fo
 - [Alignment Tools]({{ site.baseurl }}/Methods/Alignment)
 - [Quantification Tools]({{ site.baseurl }}/Methods/Quantification)
 - [Normalization Methods]({{ site.baseurl }}/Methods/Normalization)
-- [Batch Correction]({{ site.baseurl }}/Methods/BatchCorreection)
+- [Batch Correction]({{ site.baseurl }}/Methods/BatchCorrection)
 - [Differential Expression]({{ site.baseurl }}/Methods/DE)
 - [Differential Splicing]({{ site.baseurl }}/Methods/Splicing)
 - [eQTL Analyses]({{ site.baseurl }}/Methods/eQTL)
