@@ -12,6 +12,7 @@ This is basically a list of resources that I have put together as a reference fo
 - [Differential Expression]({{ site.baseurl }}/Methods/DE)
 - [Differential Splicing]({{ site.baseurl }}/Methods/Splicing)
 - [eQTL Analyses]({{ site.baseurl }}/Methods/eQTL)
+- [Gene-trait Association]({{ site.baseurl }}/Methods/GeneTraitAssociation)
 - [Pathway Analyses]({{ site.baseurl }}/Methods/Pathways)
 
 ### Other Resources
