@@ -1,0 +1,14 @@
+# Gene-trait association testing
+
+- [Summary-data-based Mendelian Randomization (SMR)](http://cnsgenomics.com/software/smr/#Overview)(Zhu, Z., Zhang, F., Hu, H., Bakshi, A., Robinson, M. R., Powell, J. E., et al. (2016). Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets. [Nature Genetics, 48(5), 481–487](http://doi.org/10.1038/ng.3538))
+- Transcriptome-Wide Association Study (TWAS) (Gusev, A., Ko, A., Shi, H., Bhatia, G., Chung, W., Penninx, B. W. J. H., et al. (2016). Integrative approaches for large-scale transcriptome-wide association studies. [Nature Genetics, 48(3), 245–252](http://doi.org/10.1038/ng.3506))
+    - [FUSION](http://gusevlab.org/projects/fusion)
+- [PrediXcan](https://github.com/hakyimlab/PrediXcan) (Gamazon, E. R., Wheeler, H. E., Shah, K. P., Mozaffari, S. V., Aquino-Michaels, K., Carroll, R. J., et al. (2015). A gene-based association method for mapping traits using reference transcriptome data. [Nature Genetics, 47(9), 1091–1098](http://doi.org/10.1038/ng.3367))
+- [Sherlock](http://sherlock.ucsf.edu/)  (He, X., Fuller, C. K., Song, Y., Meng, Q., Bin Zhang, Yang, X., & Li, H. (2013). Sherlock: Detecting Gene-Disease Associations by Matching Patterns of Expression QTL and GWAS. [American Journal of Human Genetics, 92(5), 667–680](http://doi.org/10.1016/j.ajhg.2013.03.022))
+- [enloc](https://github.com/xqwen/integrative) (Wen, X., Pique-Regi, R., & Luca, F. (2017). Integrating molecular QTL data into genome-wide genetic association analysis: Probabilistic assessment of enrichment and colocalization. [PLoS Genetics, 13(3), e1006646–25](http://doi.org/10.1371/journal.pgen.1006646))
+- coloc (Giambartolomei, C., Vukcevic, D., Schadt, E. E., Franke, L., Hingorani, A. D., Wallace, C., & Plagnol, V. (2014). Bayesian Test for Colocalisation between Pairs of Genetic Association Studies Using Summary Statistics. [PLoS Genetics, 10(5), e1004383–15](http://doi.org/10.1371/journal.pgen.1004383))
+- [QTLMatch](https://www.rdocumentation.org/packages/coloc/versions/2.3-1/topics/coloc.test) (Plagnol, V., Smyth, D. J., Todd, J. A., & Clayton, D. G. (2008). Statistical independence of the colocalized association signals for type 1 diabetes and RPS26 gene expression on chromosome 12q13. [Biostatistics, 10(2), 327–334](http://doi.org/10.1093/biostatistics/kxn039))
+- eCAVIAR (Hormozdiari, F., van de Bunt, M., Segrè, A. V., Li, X., Joo, J. W. J., Bilow, M., et al. (2016). Colocalization of GWAS and eQTL Signals Detects Target Genes. [American Journal of Human Genetics, 99(6), 1245–1260](http://doi.org/10.1016/j.ajhg.2016.10.003))
+
+
+- See [here](https://doi.org/10.1101/206961) and [here](http://sashagusev.github.io/2017-10/twas-vulnerabilities.html) for discussion of the limits of these approaches for inference of causality
