@@ -99,6 +99,7 @@ done
 ```
 
     - (or use [```set -e```](http://www.davidpashley.com/articles/writing-robust-shell-scripts/#id2382181))
+
 - What about:
     - inconsistently named inputs (including fastq files in different folders)
         - [bash paramter substitution](http://www.tldp.org/LDP/LG/issue18/bash.html)
