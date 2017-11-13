@@ -118,6 +118,7 @@
 - Merge branches:
     - ```git merge Version2```
     - ```git branch -d Version2```
+- See [here](http://ohshitgit.com) for some examples of how to fix mistakes
 
 ### A few additional considerations
 - SSH keys
