@@ -96,10 +96,11 @@ do
        fi
    fi
 done
+
 ```
 
-    - or use ```set -e``` 
-        - see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts)
+   - or use ```set -e``` 
+       - see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts)
 
 - What about:
     - inconsistently named inputs (including fastq files in different folders)
@@ -119,8 +120,8 @@ done
     - perl-level syntax opacity
     - doesn't support parallelization
     
-- Snakemake
-    - Keeps track of dependencies between files
+### Snakemake
+-     - Keeps track of dependencies between files
     - Manages scheduling of job submission to cluster
     - Automatically re-runs necessary steps when part of the pipeline changes
     - Supports config files to abstract details of pipeline from inputs and outputs
