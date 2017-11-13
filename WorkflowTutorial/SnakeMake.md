@@ -152,3 +152,6 @@ done
 ![Galaxy BWA](http://galaxy.southgreen.fr/galaxy/static/style/cleaning_mapping_workflow_2.png)
 - [Common Workflow Language (CWL)](https://github.com/common-workflow-language) / [Docker](https://www.docker.com/what-docker)
 - See [here](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbw020) for more
+
+<br>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Workflow Management</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Heath O'Brien</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
