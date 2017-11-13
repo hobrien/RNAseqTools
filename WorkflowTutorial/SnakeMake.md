@@ -152,6 +152,9 @@ done
     - ```snakemake -np```
 - Produce a diagram of dependency tree:
     - ```snakemake -n --dag | dot -Tsvg > dag.svg```
+
+![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.png?raw=true)
+
 - Rerun rule (and all rules with it as a dependencies):
     - ```snakemake -R RULENAME```
 - Rerun on new input files:
@@ -160,7 +163,6 @@ done
     - ```$ snakemake -n -R `snakemake --list-params-changes` ```
 - Submit jobs to cluster:
     - ```snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -l h_vmem={cluster.maxvmem}" -j 20```
-![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.png?raw=true)
 
 - See [here](http://snakemake.readthedocs.io/en/stable/api_reference/snakemake.html) for additional command-line options
 ### Alternatives to Snakemake
