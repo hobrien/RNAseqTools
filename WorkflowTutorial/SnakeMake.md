@@ -12,77 +12,89 @@
 - Hard coded file name:
 
     ```
-    bwa mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa FastQ/sample1_R1.fastq.gz \
-         FastQ/sample1_R2.fastq.gz | samtools view -S -bo Mappings/sample1.bam -
+    bwa mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \ 
+         FastQ/sample1_R1.fastq.gz FastQ/sample1_R2.fastq.gz \
+         | samtools view -S -bo Mappings/sample1.bam -
     samtools sort - o Mappings/sample1_sort.bam Mappings/sample1.bam
     ```
          
 - Sample names as arguments:
-    - ```for sample in $@
-         do
-             bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa FastQ/${sample}_R1.fastq.gz \
-             FastQ/${sample}_R2.fastq.gz | samtools view -S -bo Mappings/${sample}.bam
-             samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
-        done
-        ```
+
+    ```
+    for sample in $@
+    do
+        bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
+            FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
+            | samtools view -S -bo Mappings/${sample}.bam
+        samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
+    done
+    ```
     - ```cat SampleList.txt | xargs -n 1 qsub MappingPipeline.sh```
 - File Tests:
-    - ```for sample in $@
-         do
-             if [ ! -f $BASEDIR/Mappings/${sample}.bam ]
-             then
-                 bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa FastQ/${sample}_R1.fastq.gz \
-                 FastQ/${sample}_R2.fastq.gz | samtools view -S -bo Mappings/${sample}.bam
-             fi
-             if [ ! -f Mappings/${sample}_sort.bam ]
-             then
-                 samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
-             fi
-        done
-        ```
-    - ```for sample in $@
-         do
-             if test FastQ/${sample}_R1.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam \
-             || test FastQ/${sample}_R2.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam
-             then
-                 bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa FastQ/${sample}_R1.fastq.gz \
-                 FastQ/${sample}_R2.fastq.gz | samtools view -S -bo Mappings/${sample}.bam
-             fi
-             if test Mappings/${sample}.bam -nt Mappings/${sample}_sort.bam
-             then
-                 samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
-             fi
-        done
-        ```
+
+    ```
+    for sample in $@
+    do
+        if [ ! -f $BASEDIR/Mappings/${sample}.bam ]
+        then
+            bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
+                FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
+                | samtools view -S -bo Mappings/${sample}.bam
+        if [ ! -f Mappings/${sample}_sort.bam ]
+        then
+            samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
+        fi
+    done
+    ```
+    
+    ```
+    for sample in $@
+    do
+        if test FastQ/${sample}_R1.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam \
+            || test FastQ/${sample}_R2.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam
+        then
+            bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
+                FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
+                | samtools view -S -bo Mappings/${sample}.bam
+        fi
+        if test Mappings/${sample}.bam -nt Mappings/${sample}_sort.bam
+        then
+            samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
+        fi
+    done
+    ```
 - Check exit status:
-    - ```for sample in $@
-         do
-             if test FastQ/${sample}_R1.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam \
-             || test FastQ/${sample}_R2.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam
-             then
-                 bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa FastQ/${sample}_R1.fastq.gz \
-                 FastQ/${sample}_R2.fastq.gz | samtools view -S -bo Mappings/${sample}.bam
-                 if [ $? -eq 0 ]
-                 then
-                     echo "Finished bwa_mem for $sample"
-                 else
-                     echo "bwa_mem failed for $sample"
-                     exit 1
-                 fi
-             fi
-             if test Mappings/{sample}.bam -nt Mappings/{sample}_sort.bam
-             then
-                 samtools sort - o Mappings/{sample}_sort.bam Mappings/{sample}.bam
-                 if [ $? -eq 0 ]
-                 then
-                     echo "Finished samtools sort for $sample"
-                 else
-                     echo "samtools sort failed for $sample"
-                     exit 1
-                 fi
-             fi
-        done
-        ```
+
+     ```
+     for sample in $@
+     do
+        if test FastQ/${sample}_R1.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam \
+            || test FastQ/${sample}_R2.fastq.gz -nt $BASEDIR/Mappings/${sample}.bam
+        then
+            bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
+                FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
+                | samtools view -S -bo Mappings/${sample}.bam
+            if [ $? -eq 0 ]
+            then
+                echo "Finished bwa_mem for $sample"
+            else
+                echo "bwa_mem failed for $sample"
+                exit 1
+            fi
+        fi
+        if test Mappings/{sample}.bam -nt Mappings/{sample}_sort.bam
+        then
+            samtools sort - o Mappings/{sample}_sort.bam Mappings/{sample}.bam
+            if [ $? -eq 0 ]
+            then
+                echo "Finished samtools sort for $sample"
+            else
+                echo "samtools sort failed for $sample"
+                exit 1
+            fi
+        fi
+    done
+    ```
 - What about:
     - inconsistently named inputs (including fastq files in different folders)
         - [bash paramter substitution](http://www.tldp.org/LDP/LG/issue18/bash.html)
