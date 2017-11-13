@@ -133,5 +133,8 @@ done
 - Scripts
 
 
-
-[Pipeline framework review](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbw020)
+### Alternatives to Snakemake
+- Galaxy
+![Galaxy BWA](http://galaxy.southgreen.fr/galaxy/static/style/cleaning_mapping_workflow_2.png)
+- [Common Workflow Language (CWL)](https://github.com/common-workflow-language) / [Docker](https://www.docker.com/what-docker)
+- See [here](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbw020) for more
