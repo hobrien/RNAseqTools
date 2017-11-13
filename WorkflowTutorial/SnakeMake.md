@@ -144,7 +144,7 @@ done
     - [cluster configuration](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/cluster_config.yaml)
 - use ```snakemake -n --dag | dot -Tsvg > dag.svg``` to produce a diagram of dependency tree:
 
-![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.svg)
+![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.png)
 
 ### Alternatives to Snakemake
 - Galaxy
