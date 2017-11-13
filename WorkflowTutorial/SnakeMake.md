@@ -11,24 +11,24 @@
 ### Bash:
 - Hard coded file name:
 
-    ```
-    bwa mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \ 
-         FastQ/sample1_R1.fastq.gz FastQ/sample1_R2.fastq.gz \
-         | samtools view -S -bo Mappings/sample1.bam -
-    samtools sort - o Mappings/sample1_sort.bam Mappings/sample1.bam
-    ```
+```
+bwa mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \ 
+     FastQ/sample1_R1.fastq.gz FastQ/sample1_R2.fastq.gz \
+     | samtools view -S -bo Mappings/sample1.bam -
+samtools sort - o Mappings/sample1_sort.bam Mappings/sample1.bam
+```
          
 - Sample names as arguments:
 
-    ```
-    for sample in $@
-    do
-        bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
-            FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
-            | samtools view -S -bo Mappings/${sample}.bam
-        samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
-    done
-    ```
+```
+for sample in $@
+do
+    bwa_mem -t 8 GRCh38Decoy/Sequence/BWAIndex/genome.fa \
+        FastQ/${sample}_R1.fastq.gz FastQ/${sample}_R2.fastq.gz \
+        | samtools view -S -bo Mappings/${sample}.bam
+    samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
+done
+```
     - ```cat SampleList.txt | xargs -n 1 qsub MappingPipeline.sh```
 - File Tests:
 
