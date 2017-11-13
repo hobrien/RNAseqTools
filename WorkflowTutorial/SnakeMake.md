@@ -65,7 +65,7 @@ do
 done
 ```
 
-- Check exit status:
+- Check exit status of each command:
 
 ```
 for sample in $@
@@ -98,9 +98,7 @@ do
 done
 
 ```
-
-   - or use ```set -e``` 
-       - see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts)
+- or use ```set -e``` to exit script after a command fails (see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts))
 
 - What about:
     - inconsistently named inputs (including fastq files in different folders)
@@ -121,21 +119,29 @@ done
     - doesn't support parallelization
     
 ### Snakemake
--     - Keeps track of dependencies between files
-    - Manages scheduling of job submission to cluster
-    - Automatically re-runs necessary steps when part of the pipeline changes
-    - Supports config files to abstract details of pipeline from inputs and outputs
-    - Include python code within pipeline
-    
+![snakemake overview](https://snakemake.readthedocs.io/en/stable/_images/idea.png)
+- Written in python
+- Can be used to execute shell commands or python code blocks
+- Manages scheduling of job submission to cluster
+- Supports config files to abstract details of pipeline from inputs and outputs
+- Conda environments can automatically be set up for each step of the analysis
+- Many popular tools have [prewritten wrappers](https://snakemake-wrappers.readthedocs.io/en/stable) that automatically create the necessary environment and run the tools using the specified inputs, outputs, and paramaters
+- 
+
 - params.num_cores vs. [cluster.num_cores](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
 - includes
-- [wrappers](https://snakemake-wrappers.readthedocs.io/en/stable)
 - dag
 - benchmarks
 - conda env
 - [R](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r)
-- Scripts
-
+- Snakemake [documentation](https://snakemake.readthedocs.io/en/stable) and [tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
+- Examples of:
+    - a [Snakefile](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/Snakefile)
+    - including [additional Snakefiles](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/bamQC)
+    - a [config file](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/config.yaml)
+    - [cluster configuration](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/cluster_config.yaml)
+- use ``snakemake -n --dag | dot -Tsvg > dag.svg``` to produce a diagram of dependency tree:
+![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.svg)
 
 ### Alternatives to Snakemake
 - Galaxy
