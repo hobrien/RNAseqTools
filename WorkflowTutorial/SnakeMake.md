@@ -1,12 +1,13 @@
 # Workflow Management
 
 ### Reproducible science
-- whenever possible, automate *all* steps of analysis to keep a record of everything that is done and to avoid introduction of errors
-- Avoid errors where different results are based on different versions of files
-- Reduce effort required to correct errors or improve methods
-- Adapt workflow to new datasets
-- Promote data/knowledge sharing
-- Make it easy to crowdsource error correction/pipeline improvements
+- Whenever possible, automate *all* steps of analysis to keep a record of everything that is done and to avoid introduction of errors
+- This makes it easy to:
+    - Avoid errors where different results are based on different versions of files
+    - Reduce effort required to correct errors or improve methods
+    - Adapt workflow to new datasets
+    - Promote data/knowledge sharing
+    - Crowdsource error correction/pipeline improvements
 
 ### Bash:
 - Hard coded file name:
