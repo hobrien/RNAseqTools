@@ -105,7 +105,17 @@ done
     - requesting different resources for different steps of pipeline
         - [qsub -hold_jid argument](https://stackoverflow.com/questions/11525214/wait-for-set-of-qsub-jobs-to-complete)
 
-- Make
+### Make
+- Used to compile [source code](https://github.com/alexdobin/STAR/tree/master/source) into binary
+- Developed at a time when compilation was extremely resource-intensive
+- Allows "nightly builds" where only modified code is re-compiled
+- Builds a dependency tree from implicit wildcard rules
+- Can be used to develop [bioinformatics pipelines](https://swcarpentry.github.io/make-novice)
+- However: 
+    - limited functionality and flexibility
+    - perl-level syntax opacity
+    - doesn't support parallelization
+    
 - Snakemake
     - Keeps track of dependencies between files
     - Manages scheduling of job submission to cluster
@@ -122,6 +132,6 @@ done
 - [R](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r)
 - Scripts
 
-- [Star source code](https://github.com/alexdobin/STAR/tree/master/source)
+
 
 [Pipeline framework review](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbw020)
