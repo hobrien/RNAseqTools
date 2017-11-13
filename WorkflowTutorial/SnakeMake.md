@@ -134,13 +134,15 @@ done
 - Supports [benchmarking](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#benchmarking) to report CPU and memory usage and [Logging](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-5-logging) of messages/errors
 - Supports [config files](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) to abstract details of pipeline from inputs and outputs
 - Workflows can also be further abstracted by:
-    - including [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
-    - using the ```script``` command to [run code in a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
-    - including [additional Snakefiles](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes)
+    - using ```include`` statements to import [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
+    - using the ```script``` command to [execute a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
+    - using ```include``` statements to import rules from [other Snakefiles](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes)
     - creating [sub-workflows](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#sub-workflows)
 - [Conda environments](http://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#integrated-package-management) can automatically be set up for each step of the analysis
 - Many popular tools have [prewritten wrappers](https://snakemake-wrappers.readthedocs.io/en/stable) that automatically create the necessary environment and run the tools using the specified inputs, outputs, and paramaters
 - There is also a [repository](https://bitbucket.org/johanneskoester/snakemake-workflows) of example rules and workflows for NGS analyses
+
+### Getting started with Snakemake
 - Snakemake [documentation](https://snakemake.readthedocs.io/en/stable) and [tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
 - Examples of:
     - a [Snakefile](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/Snakefile)
@@ -156,7 +158,7 @@ done
 
 ![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.png?raw=true)
 
-- Rerun rule (and all rules with it as a dependencies):
+- Rerun rule (and all rules with it as a dependency):
     - ```snakemake -R RULENAME```
 - Rerun on new input files:
     - ```snakemake -n -R `snakemake --list-input-changes` ```
@@ -166,6 +168,7 @@ done
     - ```snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -l h_vmem={cluster.maxvmem}" -j 20```
 
 - See [here](http://snakemake.readthedocs.io/en/stable/api_reference/snakemake.html) for additional command-line options
+
 ### Alternatives to Snakemake
 - Galaxy
 ![Galaxy BWA](http://galaxy.southgreen.fr/galaxy/static/style/cleaning_mapping_workflow_2.png)
