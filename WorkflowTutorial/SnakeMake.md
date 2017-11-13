@@ -98,7 +98,8 @@ do
 done
 ```
 
-    - or use ```set -e``` (see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts/#id2382181))
+    - or use ```set -e``` 
+        - see [here](http://www.davidpashley.com/articles/writing-robust-shell-scripts)
 
 - What about:
     - inconsistently named inputs (including fastq files in different folders)
