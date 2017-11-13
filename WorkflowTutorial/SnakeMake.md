@@ -29,6 +29,8 @@ do
     samtools sort - o Mappings/${sample}_sort.bam Mappings/${sample}.bam
 done
 ```
+
+- Pass sample names to script for paralle execution:
     - ```cat SampleList.txt | xargs -n 1 qsub MappingPipeline.sh```
     
 - File Tests:
@@ -140,7 +142,8 @@ done
     - including [additional Snakefiles](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/bamQC)
     - a [config file](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/config.yaml)
     - [cluster configuration](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/cluster_config.yaml)
-- use ``snakemake -n --dag | dot -Tsvg > dag.svg``` to produce a diagram of dependency tree:
+- use ```snakemake -n --dag | dot -Tsvg > dag.svg``` to produce a diagram of dependency tree:
+
 ![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.svg)
 
 ### Alternatives to Snakemake
