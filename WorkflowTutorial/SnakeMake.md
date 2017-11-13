@@ -124,19 +124,19 @@ done
 ![snakemake overview](https://snakemake.readthedocs.io/en/stable/_images/idea.png)
 - Written in python
 - Can be used to execute shell commands or python code blocks (in theory also [R code blocks](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r))
-- Manages scheduling of job submission to cluster (or to the cloud)
+- Manages scheduling of job submission to [cluster](http://snakemake.readthedocs.io/en/stable/executable.html#cluster-execution) (or to the [cloud](http://snakemake.readthedocs.io/en/stable/executable.html#cloud-support))
     - pe smp and h_vmem can be specified as params in the Snakefile or in a [cluster config file](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
     - cluster config files allow specification of default parameters
-- Supports config files to abstract details of pipeline from inputs and outputs
-- Conda environments can automatically be set up for each step of the analysis
+- Supports [config files](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) to abstract details of pipeline from inputs and outputs
+- Supports [benchmarking](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#benchmarking) to report CPU and memory usage
+- Workflows can also be further abstracted by:
+    - including [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
+    - using the ```script``` command to [run code in a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
+    - including [additional Snakefiles](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes)
+    - creating [sub-workflows](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#sub-workflows)
+- [Conda environments](http://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#integrated-package-management) can automatically be set up for each step of the analysis
 - Many popular tools have [prewritten wrappers](https://snakemake-wrappers.readthedocs.io/en/stable) that automatically create the necessary environment and run the tools using the specified inputs, outputs, and paramaters
-- Cluster config can be used to 
 
-- includes
-- dag
-- benchmarks
-- conda env
-- [R](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r)
 - Snakemake [documentation](https://snakemake.readthedocs.io/en/stable) and [tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
 - Examples of:
     - a [Snakefile](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/Snakefile)
