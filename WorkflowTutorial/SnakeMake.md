@@ -123,15 +123,15 @@ done
 ### Snakemake
 ![snakemake overview](https://snakemake.readthedocs.io/en/stable/_images/idea.png)
 - Written in python
-- Can be used to execute shell commands or python code blocks (in theory also R code blocks)
+- Can be used to execute shell commands or python code blocks (in theory also [R code blocks](http://snakemake.readthedocs.io/en/stable/snakefiles/utils.html#scripting-with-r))
 - Manages scheduling of job submission to cluster (or to the cloud)
-    - h
+    - pe smp and h_vmem can be specified as params in the Snakefile or in a [cluster config file](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
+    - cluster config files allow specification of default parameters
 - Supports config files to abstract details of pipeline from inputs and outputs
 - Conda environments can automatically be set up for each step of the analysis
 - Many popular tools have [prewritten wrappers](https://snakemake-wrappers.readthedocs.io/en/stable) that automatically create the necessary environment and run the tools using the specified inputs, outputs, and paramaters
 - Cluster config can be used to 
 
-- params.num_cores vs. [cluster.num_cores](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
 - includes
 - dag
 - benchmarks
