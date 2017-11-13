@@ -127,8 +127,11 @@ done
 - Manages scheduling of job submission to [cluster](http://snakemake.readthedocs.io/en/stable/executable.html#cluster-execution) (or to the [cloud](http://snakemake.readthedocs.io/en/stable/executable.html#cloud-support))
     - pe smp and h_vmem can be specified as params in the Snakefile or in a [cluster config file](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#cluster-configuration)
     - cluster config files allow specification of default parameters
+- Inputs, outputs, and [parameters](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-4-rule-parameters) can be specified for each rule
+- Need to include a "master rule" (usually called ```all```) which requires all of your desired outputs as input
+- Intermediate files can be [automatically removed](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-6-temporary-and-protected-files) once they are no longer needed
+- Supports [benchmarking](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#benchmarking) to report CPU and memory usage and [Logging](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-5-logging) of messages/errors
 - Supports [config files](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) to abstract details of pipeline from inputs and outputs
-- Supports [benchmarking](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#benchmarking) to report CPU and memory usage
 - Workflows can also be further abstracted by:
     - including [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
     - using the ```script``` command to [run code in a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
@@ -136,17 +139,30 @@ done
     - creating [sub-workflows](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#sub-workflows)
 - [Conda environments](http://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#integrated-package-management) can automatically be set up for each step of the analysis
 - Many popular tools have [prewritten wrappers](https://snakemake-wrappers.readthedocs.io/en/stable) that automatically create the necessary environment and run the tools using the specified inputs, outputs, and paramaters
-
+- There is also a [repository](https://bitbucket.org/johanneskoester/snakemake-workflows) of example rules and workflows for NGS analyses
 - Snakemake [documentation](https://snakemake.readthedocs.io/en/stable) and [tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
 - Examples of:
     - a [Snakefile](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/Snakefile)
     - including [additional Snakefiles](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/bamQC)
     - a [config file](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/config.yaml)
     - [cluster configuration](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/cluster_config.yaml)
-- use ```snakemake -n --dag | dot -Tsvg > dag.svg``` to produce a diagram of dependency tree:
 
+### Snakemake usage
+- Do a dry run of workflow, printing commands to screen:
+    - ```snakemake -np```
+- Produce a diagram of dependency tree:
+    - ```snakemake -n --dag | dot -Tsvg > dag.svg```
+- Rerun rule (and all rules with it as a dependencies):
+    - ```snakemake -R RULENAME```
+- Rerun on new input files:
+    - ```snakemake -n -R `snakemake --list-input-changes` ```
+- Rerun edited rules:
+    - ```$ snakemake -n -R `snakemake --list-params-changes` ```
+- Submit jobs to cluster:
+    - ```snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -l h_vmem={cluster.maxvmem}" -j 20```
 ![dag](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/dag.png?raw=true)
 
+- See [here](http://snakemake.readthedocs.io/en/stable/api_reference/snakemake.html) for additional command-line options
 ### Alternatives to Snakemake
 - Galaxy
 ![Galaxy BWA](http://galaxy.southgreen.fr/galaxy/static/style/cleaning_mapping_workflow_2.png)
