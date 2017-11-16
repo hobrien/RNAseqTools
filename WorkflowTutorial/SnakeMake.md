@@ -8,6 +8,8 @@
     - Adapt workflow to new datasets
     - Promote data/knowledge sharing
     - Crowdsource error correction/pipeline improvements
+- This is all covered in detail here:
+    - Wilson, G., Bryan, J., Cranston, K., Kitzes, J., Nederbragt, L., & Teal, T. K. (2017). Good enough practices in scientific computing. [PLoS Computational Biology, 13(6), e1005510](http://doi.org/10.1371/journal.pcbi.1005510)
 
 ### Bash:
 - Hard coded file name:
@@ -133,6 +135,7 @@ done
 - Intermediate files can be [automatically removed](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-6-temporary-and-protected-files) once they are no longer needed
 - Supports [benchmarking](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#benchmarking) to report CPU and memory usage and [Logging](http://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-5-logging) of messages/errors
 - Supports [config files](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) to abstract details of pipeline from inputs and outputs
+    - [Input functions](https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-3-input-functions) allow config file entries to be accessed by wildcard values
 - Workflows can also be further abstracted by:
     - using ```include`` statements to import [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
     - using the ```script``` command to [execute a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
