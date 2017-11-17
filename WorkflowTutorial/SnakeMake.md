@@ -137,7 +137,7 @@ done
 - Supports [config files](http://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html) to abstract details of pipeline from inputs and outputs
     - [Input functions](https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#step-3-input-functions) allow config file entries to be accessed by wildcard values
 - Workflows can also be further abstracted by:
-    - using ```include`` statements to import [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
+    - using ```include``` statements to import [python code](http://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-want-to-import-some-helper-functions-from-another-python-file-is-that-possible)
     - using the ```script``` command to [execute a python script](http://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#using-custom-scripts), giving it access to variables defined in the Snakefile
     - using ```include``` statements to import rules from [other Snakefiles](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes)
     - creating [sub-workflows](http://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#sub-workflows)
