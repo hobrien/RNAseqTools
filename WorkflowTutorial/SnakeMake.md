@@ -152,6 +152,7 @@ done
     - including [additional Snakefiles](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/bamQC)
     - a [config file](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/config.yaml)
     - [cluster configuration](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/cluster_config.yaml)
+    - a [bash script](https://github.com/hobrien/RNAseqTools/blob/master/Benchmarking/snakemake.sh) for invoking snakemake on the cluster, including email notification upon completion
 
 ### Snakemake usage
 - Do a dry run of workflow, printing commands to screen:
