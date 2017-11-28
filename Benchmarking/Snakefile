@@ -11,29 +11,18 @@ rule all:
         expand("{mapping_folder}/{sample}.sort.bam.bai", mapping_folder=config['mappings'], sample=config["samples"]),
         expand("{mapping_folder}/{sample}.sort.bam", mapping_folder=config['mappings'], sample=config["samples"]),
         os.path.join(config['mappings'], "BamQC.pdf"),
-        expand("FastQC/{sample}_R1.html", sample=config["samples"]),
-        expand("FastQC/{sample}_R2.html", sample=config["samples"])
+        expand("FastQC/{sample}_R{read}.html", sample=config["samples"], read=[1,2]),
 
-rule fastqc1:
+rule fastqc:
     input:
-        lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')[0]
+        lambda wildcards: config["samples"][wildcards.sample]['reads']['read']
     output:
-        html="FastQC/{sample}_R1.html",
-        zip="FastQC/{sample}_R1.zip"
+        html="FastQC/{sample}_R{read}.html",
+        zip="FastQC/{sample}_R{read}.zip"
     params: ""
     wrapper:
         "0.17.4/bio/fastqc"
 
-rule fastqc2:
-    input:
-        lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')[1]
-    output:
-        html="FastQC/{sample}_R2.html",
-        zip="FastQC/{sample}_R2.zip"
-    params: ""
-    wrapper:
-        "0.17.4/bio/fastqc"
-       
 rule hisat:
     input:
         reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
