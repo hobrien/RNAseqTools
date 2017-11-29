@@ -36,6 +36,8 @@ vignettes/*.pdf
 # Output from scripts
 Benchmarking/Hisat/*
 Benchmarking/Logs/*
+Benchmarking/multiqc_data/*
+Benchmarking/multiqc_report.html
 
 # Snakemake files
 .snakemake
