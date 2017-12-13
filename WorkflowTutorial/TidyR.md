@@ -8,11 +8,15 @@
 
 - Compact data (AKA wide) vs tidy data (AKA long data):
 
+- compact:
+
 | GeneID | Sample1 | Sample2 |
 | ------ | ------- | ------- |
 | Gene1  | 473     | 526     |
 | Gene2  | 7203    | 6405    |
 | Gene3  | 59487   | 51467   |
+
+- wide:
 
 | GeneID | Sample  | Count   |
 | ------ | ------- | ------- |
@@ -53,7 +57,6 @@ rnorm(10) %>% mean
 - if a column of mixed numbers and strings is coearsed using as.numeric(), traditional dataframes will return the rank of the factor levels, rather than the numbers:
 
 ```{r}
-
 df <- read.delim("examples/SampleInfo.txt")
 2 * as.numeric(df$ReadLength)
 # [1] 6 6 6 6 6 6 6 8 4 6 6 4 2 4 4 2 2 6 4 2 2 4 4 2 4 4 2...
@@ -83,7 +86,6 @@ long <- gather(tibble, Sample, Value, -Gene)
 wide <- spread(long, Sample, Value)
 
 separate(wide, Gene, c("GeneID", "Gene_name"))
-
 ```
 
 ## dplyr
@@ -100,13 +102,11 @@ separate(wide, Gene, c("GeneID", "Gene_name"))
 ```{r}
 head(tibble[,c('Sample', 'Sex')])
 select(SchoolData, Sample, Sex) %>% head
-
 ```
 
 - Select rows
 
 ```{r}
-
 head(subset(tibble, PCW< 14))
 filter(tibble, PCW<14) %>% head
 ```
@@ -114,7 +114,6 @@ filter(tibble, PCW<14) %>% head
 - Sort
 
 ```{r}
-
 head(tibble[order(tibble$RIN),])
 arrange(tibble, RIN) %>% head
 ```
@@ -122,7 +121,6 @@ arrange(tibble, RIN) %>% head
 - Calculate group means
 
 ```{r}
-
 head(aggregate(PCW ~ Sex, data=tibble, FUN=function(x) av_score=mean(x)))
 #I can't figure out how to rename the output
 tibble %>% group_by(Sex) %>% summarise(av_age=mean(PCW)) %>% head
@@ -131,7 +129,6 @@ tibble %>% group_by(Sex) %>% summarise(av_age=mean(PCW)) %>% head
 - Calculate multiple stats
 
 ```{r}
-
 head(aggregate(RIN ~ Sex+PCW, data=tibble, FUN=function(x) c(mean=mean(x), var=var(x))))
 tibble %>% group_by(Sex, PCW) %>% summarise(mean=mean(RIN), var=var(RIN)) %>% head
 ```
@@ -184,7 +181,6 @@ tibble %>%
     
 ```{r}
 tibble %>% group_by(PCW) %>% filter(min_rank(desc(RIN)) == 1)
-
 ```
 
 - Calculate deviation from sex-specific mean age for each sample
@@ -213,6 +209,7 @@ full_join(tibble, counts, by=c("Sample" = "SampleID")) #keeps all rows in both, 
 - package for string manipulation
 
 - extract fragment size estimate from homer peak calling
+
 ```{r}
 frag_size <- read_file("examples/peak_calling.txt") %>%
     str_extract("(?<=fragment size = )\\d+") %>% 
@@ -224,6 +221,7 @@ frag_size <- read_file("examples/peak_calling.txt") %>%
 - apply a function across subsets of a data frame (among other things)
 
 - correlate RIN vs mapping stats
+
 ```{r}
 inner_join(tibble, counts, by=c("Sample" = "SampleID")) %>%
     gather(stat, value, 7:13) %>%
