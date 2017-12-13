@@ -1,0 +1,166 @@
+# ARGUMENTS LIST:
+# name = ATAC14_2_S1_hg19.srtd
+# format = BAMPE
+# ChIP-seq file = ['ATAC14_2_S1_hg19.srtd.bam']
+# control file = None
+# effective genome size = 2.70e+09
+# band width = 300
+# model fold = [5, 50]
+# qvalue cutoff = 5.00e-02
+# Larger dataset will be scaled towards smaller dataset.
+# Range for calculating regional lambda is: 10000 bps
+# Broad region calling is off
+# Paired-End mode is on
+INFO  @ Sun, 12 Nov 2017 21:01:42: #1 read fragment files...
+INFO  @ Sun, 12 Nov 2017 21:01:42: #1 read treatment fragments...
+INFO  @ Sun, 12 Nov 2017 21:01:55:  1000000
+INFO  @ Sun, 12 Nov 2017 21:02:08:  2000000
+INFO  @ Sun, 12 Nov 2017 21:02:21:  3000000
+INFO  @ Sun, 12 Nov 2017 21:02:33:  4000000
+INFO  @ Sun, 12 Nov 2017 21:02:46:  5000000
+INFO  @ Sun, 12 Nov 2017 21:02:59:  6000000
+INFO  @ Sun, 12 Nov 2017 21:03:12:  7000000
+INFO  @ Sun, 12 Nov 2017 21:03:25:  8000000
+INFO  @ Sun, 12 Nov 2017 21:03:37:  9000000
+INFO  @ Sun, 12 Nov 2017 21:03:50:  10000000
+INFO  @ Sun, 12 Nov 2017 21:04:03:  11000000
+INFO  @ Sun, 12 Nov 2017 21:04:15:  12000000
+INFO  @ Sun, 12 Nov 2017 21:04:28:  13000000
+INFO  @ Sun, 12 Nov 2017 21:04:41:  14000000
+INFO  @ Sun, 12 Nov 2017 21:04:53:  15000000
+INFO  @ Sun, 12 Nov 2017 21:05:06:  16000000
+INFO  @ Sun, 12 Nov 2017 21:05:19:  17000000
+INFO  @ Sun, 12 Nov 2017 21:05:32:  18000000
+INFO  @ Sun, 12 Nov 2017 21:05:45:  19000000
+INFO  @ Sun, 12 Nov 2017 21:05:57:  20000000
+INFO  @ Sun, 12 Nov 2017 21:06:10:  21000000
+INFO  @ Sun, 12 Nov 2017 21:06:23:  22000000
+INFO  @ Sun, 12 Nov 2017 21:06:36:  23000000
+INFO  @ Sun, 12 Nov 2017 21:06:49:  24000000
+INFO  @ Sun, 12 Nov 2017 21:07:02:  25000000
+INFO  @ Sun, 12 Nov 2017 21:07:14:  26000000
+INFO  @ Sun, 12 Nov 2017 21:07:27:  27000000
+INFO  @ Sun, 12 Nov 2017 21:07:40:  28000000
+INFO  @ Sun, 12 Nov 2017 21:07:53:  29000000
+INFO  @ Sun, 12 Nov 2017 21:08:06:  30000000
+INFO  @ Sun, 12 Nov 2017 21:08:19:  31000000
+INFO  @ Sun, 12 Nov 2017 21:08:31:  32000000
+INFO  @ Sun, 12 Nov 2017 21:08:44:  33000000
+INFO  @ Sun, 12 Nov 2017 21:08:57:  34000000
+INFO  @ Sun, 12 Nov 2017 21:09:10:  35000000
+INFO  @ Sun, 12 Nov 2017 21:09:23:  36000000
+INFO  @ Sun, 12 Nov 2017 21:09:35:  37000000
+INFO  @ Sun, 12 Nov 2017 21:09:48:  38000000
+INFO  @ Sun, 12 Nov 2017 21:10:01:  39000000
+INFO  @ Sun, 12 Nov 2017 21:10:14:  40000000
+INFO  @ Sun, 12 Nov 2017 21:10:26:  41000000
+INFO  @ Sun, 12 Nov 2017 21:10:39:  42000000
+INFO  @ Sun, 12 Nov 2017 21:10:52:  43000000
+INFO  @ Sun, 12 Nov 2017 21:11:06:  44000000
+INFO  @ Sun, 12 Nov 2017 21:11:18:  45000000
+INFO  @ Sun, 12 Nov 2017 21:11:31:  46000000
+INFO  @ Sun, 12 Nov 2017 21:11:44:  47000000
+INFO  @ Sun, 12 Nov 2017 21:11:57:  48000000
+INFO  @ Sun, 12 Nov 2017 21:12:10:  49000000
+INFO  @ Sun, 12 Nov 2017 21:12:22:  50000000
+INFO  @ Sun, 12 Nov 2017 21:12:35:  51000000
+INFO  @ Sun, 12 Nov 2017 21:12:48:  52000000
+INFO  @ Sun, 12 Nov 2017 21:13:01:  53000000
+INFO  @ Sun, 12 Nov 2017 21:13:14:  54000000
+INFO  @ Sun, 12 Nov 2017 21:13:27:  55000000
+INFO  @ Sun, 12 Nov 2017 21:13:40:  56000000
+INFO  @ Sun, 12 Nov 2017 21:13:53:  57000000
+INFO  @ Sun, 12 Nov 2017 21:14:06:  58000000
+INFO  @ Sun, 12 Nov 2017 21:14:19:  59000000
+INFO  @ Sun, 12 Nov 2017 21:14:31:  60000000
+INFO  @ Sun, 12 Nov 2017 21:14:44:  61000000
+INFO  @ Sun, 12 Nov 2017 21:14:57:  62000000
+INFO  @ Sun, 12 Nov 2017 21:15:10:  63000000
+INFO  @ Sun, 12 Nov 2017 21:15:23:  64000000
+INFO  @ Sun, 12 Nov 2017 21:15:35:  65000000
+INFO  @ Sun, 12 Nov 2017 21:15:48:  66000000
+INFO  @ Sun, 12 Nov 2017 21:16:01:  67000000
+INFO  @ Sun, 12 Nov 2017 21:16:14:  68000000
+INFO  @ Sun, 12 Nov 2017 21:16:27:  69000000
+INFO  @ Sun, 12 Nov 2017 21:16:40:  70000000
+INFO  @ Sun, 12 Nov 2017 21:16:52:  71000000
+INFO  @ Sun, 12 Nov 2017 21:17:05:  72000000
+INFO  @ Sun, 12 Nov 2017 21:17:18:  73000000
+INFO  @ Sun, 12 Nov 2017 21:17:31:  74000000
+INFO  @ Sun, 12 Nov 2017 21:17:43:  75000000
+INFO  @ Sun, 12 Nov 2017 21:17:56:  76000000
+INFO  @ Sun, 12 Nov 2017 21:18:09:  77000000
+INFO  @ Sun, 12 Nov 2017 21:18:22:  78000000
+INFO  @ Sun, 12 Nov 2017 21:18:35:  79000000
+INFO  @ Sun, 12 Nov 2017 21:18:47:  80000000
+INFO  @ Sun, 12 Nov 2017 21:19:00:  81000000
+INFO  @ Sun, 12 Nov 2017 21:19:13:  82000000
+INFO  @ Sun, 12 Nov 2017 21:19:26:  83000000
+INFO  @ Sun, 12 Nov 2017 21:19:39:  84000000
+INFO  @ Sun, 12 Nov 2017 21:19:51:  85000000
+INFO  @ Sun, 12 Nov 2017 21:20:04:  86000000
+INFO  @ Sun, 12 Nov 2017 21:20:17:  87000000
+INFO  @ Sun, 12 Nov 2017 21:20:29:  88000000
+INFO  @ Sun, 12 Nov 2017 21:20:42:  89000000
+INFO  @ Sun, 12 Nov 2017 21:20:55:  90000000
+INFO  @ Sun, 12 Nov 2017 21:21:08:  91000000
+INFO  @ Sun, 12 Nov 2017 21:21:20:  92000000
+INFO  @ Sun, 12 Nov 2017 21:21:33:  93000000
+INFO  @ Sun, 12 Nov 2017 21:21:46:  94000000
+INFO  @ Sun, 12 Nov 2017 21:21:59:  95000000
+INFO  @ Sun, 12 Nov 2017 21:22:11:  96000000
+INFO  @ Sun, 12 Nov 2017 21:22:24:  97000000
+INFO  @ Sun, 12 Nov 2017 21:22:37:  98000000
+INFO  @ Sun, 12 Nov 2017 21:22:50:  99000000
+INFO  @ Sun, 12 Nov 2017 21:23:03:  100000000
+INFO  @ Sun, 12 Nov 2017 21:23:15:  101000000
+INFO  @ Sun, 12 Nov 2017 21:23:28:  102000000
+INFO  @ Sun, 12 Nov 2017 21:23:41:  103000000
+INFO  @ Sun, 12 Nov 2017 21:23:54:  104000000
+INFO  @ Sun, 12 Nov 2017 21:24:06:  105000000
+INFO  @ Sun, 12 Nov 2017 21:24:19:  106000000
+INFO  @ Sun, 12 Nov 2017 21:24:32:  107000000
+INFO  @ Sun, 12 Nov 2017 21:24:45:  108000000
+INFO  @ Sun, 12 Nov 2017 21:24:58:  109000000
+INFO  @ Sun, 12 Nov 2017 21:25:11:  110000000
+INFO  @ Sun, 12 Nov 2017 21:25:24:  111000000
+INFO  @ Sun, 12 Nov 2017 21:25:37:  112000000
+INFO  @ Sun, 12 Nov 2017 21:25:49:  113000000
+INFO  @ Sun, 12 Nov 2017 21:26:02:  114000000
+INFO  @ Sun, 12 Nov 2017 21:26:15:  115000000
+INFO  @ Sun, 12 Nov 2017 21:26:27:  116000000
+INFO  @ Sun, 12 Nov 2017 21:26:40:  117000000
+INFO  @ Sun, 12 Nov 2017 21:26:52:  118000000
+INFO  @ Sun, 12 Nov 2017 21:27:05:  119000000
+INFO  @ Sun, 12 Nov 2017 21:27:18:  120000000
+INFO  @ Sun, 12 Nov 2017 21:27:30:  121000000
+INFO  @ Sun, 12 Nov 2017 21:27:43:  122000000
+INFO  @ Sun, 12 Nov 2017 21:27:56:  123000000
+INFO  @ Sun, 12 Nov 2017 21:28:08:  124000000
+INFO  @ Sun, 12 Nov 2017 21:28:21:  125000000
+INFO  @ Sun, 12 Nov 2017 21:28:33:  126000000
+INFO  @ Sun, 12 Nov 2017 21:28:46:  127000000
+INFO  @ Sun, 12 Nov 2017 21:29:00:  128000000
+INFO  @ Sun, 12 Nov 2017 21:29:13:  129000000
+INFO  @ Sun, 12 Nov 2017 21:29:25:  130000000
+INFO  @ Sun, 12 Nov 2017 21:29:38:  131000000
+INFO  @ Sun, 12 Nov 2017 21:31:52: #1 mean fragment size is determined as 47 bp from treatment
+INFO  @ Sun, 12 Nov 2017 21:31:52: #1 fragment size = 47
+INFO  @ Sun, 12 Nov 2017 21:31:52: #1  total fragments in treatment: 131503258
+INFO  @ Sun, 12 Nov 2017 21:31:52: #1 user defined the maximum fragments...
+INFO  @ Sun, 12 Nov 2017 21:31:52: #1 filter out redundant fragments by allowing at most 1 identical fragment(s)
+INFO  @ Sun, 12 Nov 2017 21:40:36: #1  fragments after filtering in treatment: 72016170
+INFO  @ Sun, 12 Nov 2017 21:40:36: #1  Redundant rate of treatment: 0.45
+INFO  @ Sun, 12 Nov 2017 21:40:36: #1 finished!
+INFO  @ Sun, 12 Nov 2017 21:40:36: #2 Build Peak Model...
+INFO  @ Sun, 12 Nov 2017 21:40:36: #2 Skipped...
+INFO  @ Sun, 12 Nov 2017 21:40:36: #2 Use 47 as fragment length
+INFO  @ Sun, 12 Nov 2017 21:40:36: #3 Call peaks...
+INFO  @ Sun, 12 Nov 2017 21:40:36: #3 Pre-compute pvalue-qvalue table...
+INFO  @ Sun, 12 Nov 2017 21:47:08: #3 Call peaks for each chromosome...
+INFO  @ Sun, 12 Nov 2017 21:40:36: #3 Pre-compute pvalue-qvalue table...
+INFO  @ Sun, 12 Nov 2017 21:47:08: #3 Call peaks for each chromosome...
+INFO  @ Sun, 12 Nov 2017 21:50:37: #4 Write output xls file... /home/c1477909/ATAC14_SV40MG_Analysis/peak_files/ATAC14_2_S1_hg19.srtd_peaks.xl$
+INFO  @ Sun, 12 Nov 2017 21:50:40: #4 Write peak in narrowPeak format file... /home/c1477909/ATAC14_SV40MG_Analysis/peak_files/ATAC14_2_S1_hg1$
+INFO  @ Sun, 12 Nov 2017 21:50:42: #4 Write summits bed file... /home/c1477909/ATAC14_SV40MG_Analysis/peak_files/ATAC14_2_S1_hg19.srtd_summits$
+INFO  @ Sun, 12 Nov 2017 21:50:43: Done!

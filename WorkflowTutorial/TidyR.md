@@ -1,14 +1,18 @@
 # Tidyverse Tutorial
 
-## The traditional approaches:
-```{r}
-set.seed(69)
-sample <- rnorm(10)
-mean(sample)
-     
-set.seed(69)
-mean(rnorm(10))
-```
+- The Tidyverse is a collection of R packages for manipulating tidy data
+- They do not necessarily extend functionality beyond base R but they do make things easier and faster:
+    - consistent syntax (always snake_case, always take the data as the first argument)
+    - consistent output (type-stable, never makes assumptions about how you want to treat your data)
+    - amenable to piping
+
+- Tidy data (AKA long data) vs. compact data (AKA wide):
+
+
+- Each variable you measure should be in one column.
+- Each different observation of that variable should be in a different row.
+- There should be one table for each "kind" of variable.
+- If you have multiple tables, they should include a column in the table that allows them to be linked.
 
 ## The pipe function:
 
@@ -20,182 +24,199 @@ rnorm(10) %>% mean
 
 ![Ceci ne pas une pipe](https://saciart.files.wordpress.com/2014/10/magritte_pipe.jpg?w=710&h=496)
 
-## Select columns
-```{r}
-library(RCurl)
-library(dplyr)
-SchoolData<-read.csv(text=getURL('https://raw.githubusercontent.com/MixedModels/LearningMLwinN/master/tutorial.txt'), sep="\t")
 
-head(SchoolData[,c('standlrt', 'normexam')])
-select(SchoolData, standlrt, normexam) %>% head
+## tibble/readr
+- tibble is the tidyverse version of a dataframe
+- readr is the tidyverse version of read.delim
+
+- tibbles look nicer than dataframes when printed and are more [consistent/predictable](https://cran.r-project.org/web/packages/tibble/README.html):
+    - "tibble() does much less than data.frame(): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates row.names()"
+    - when printed to the screen, tibbles only display 10 rows and as many columns as can fit on
+    - they also display the data type of each column and the dimensions of the dataframe
+
+- readr creates tibbles. It's also *fast* and flexible
+
+- if a column of mixed numbers and strings is coearsed using as.numeric(), traditional dataframes will return the rank of the factor levels, rather than the numbers:
+
+```{r}
+
+df <- read.delim("examples/SampleInfo.txt")
+2 * as.numeric(df$ReadLength)
+# [1] 6 6 6 6 6 6 6 8 4 6 6 4 2 4 4 2 2 6 4 2 2 4 4 2 4 4 2...
+
+2 * as.numeric(as.character(df$ReadLength))
+# [1] 152 152 152 152 152 152 152  NA 250 152 152 250 200
+
+tibble <- read_tsv("examples/SampleInfo.txt")
+2 * as.numeric(tibble$ReadLength)
+# [1] 152 152 152 152 152 152 152  NA 250 152 152 250 200
 ```
 
-## Select rows
+# tidyr
+
+- tidyr converts between wide and long formats
+- it can also split a column into multiple columns
+
 ```{r}
-head(subset(SchoolData, standlrt< -1))
-filter(SchoolData, standlrt< -1) %>% head
+wide <-tribble(
+  ~Gene, ~Sample1,  ~Sample2,
+  "Gene1_APOE1", 473,  526,
+  "Gene2_SETD1A", 7203,  6405,
+  "Gene3_TCF4", 59487, 51467
+)
+
+long <- gather(tibble, Sample, Value, -Gene)
+wide <- spread(long, Sample, Value)
+
+separate(wide, Gene, c("GeneID", "Gene_name"))
+
 ```
 
-## Sort
+## dplyr
+- dplyr is for dataframe/tibble manipulation
+    - filtering rows (filter)
+    - selecting columns (select)
+    - modifying columns (mutate)
+    - joining tables (left_join, right_join, full_join, inner_join)
+    - summarise columns (summarise)
+    - group-wise summaries (group_by)
+    
+- Select columns
 ```{r}
-head(SchoolData[order(SchoolData$standlrt),])
-arrange(SchoolData, standlrt) %>% head
+head(tibble[,c('Sample', 'Sex')])
+select(SchoolData, Sample, Sex) %>% head
+
 ```
 
-## Calculate group means
+- Select rows
+
 ```{r}
-head(aggregate(normexam ~ school, data=SchoolData, FUN=function(x) av_score=mean(x)))
+
+head(subset(tibble, PCW< 14))
+filter(tibble, PCW<14) %>% head
+```
+
+- Sort
+```{r}
+
+head(tibble[order(tibble$RIN),])
+arrange(tibble, RIN) %>% head
+```
+
+- Calculate group means
+```{r}
+
+head(aggregate(PCW ~ Sex, data=tibble, FUN=function(x) av_score=mean(x)))
 #I can't figure out how to rename the output
-SchoolData %>% group_by(school) %>% summarise(av_score=mean(normexam)) %>% head
+tibble %>% group_by(Sex) %>% summarise(av_age=mean(PCW)) %>% head
 ```
 
-## Calculate multiple stats
+- Calculate multiple stats
 ```{r}
 
-head(aggregate(normexam ~ girl+schgend, data=SchoolData, FUN=function(x) c(mean=mean(x), var=var(x))))
-SchoolData %>% group_by(girl, schgend) %>% summarise(mean=mean(normexam), var=var(normexam)) %>% head
+head(aggregate(RIN ~ Sex+PCW, data=tibble, FUN=function(x) c(mean=mean(x), var=var(x))))
+tibble %>% group_by(Sex, PCW) %>% summarise(mean=mean(RIN), var=var(RIN)) %>% head
 ```
 
-## Count occurences per group
+- Count occurences per group
 ```{r}
-head(aggregate(normexam ~ school, data=SchoolData,  FUN=function(x) num_students=length(x)))
-SchoolData %>% group_by(school) %>% summarise(num_students=n()) %>% head
+head(aggregate(RIN ~ Sex, data=tibble,  FUN=function(x) num_students=length(x)))
+tibble %>% group_by(Sex) %>% summarise(num_samples=n()) %>% head
 ```
 
-## Compute new values
+- Compute new values
 ```{r}
-SchoolData$improvement <- SchoolData$normexam - SchoolData$standlrt
+tibble$total_length <- 2 * as.numeric(tibble$ReadLength)
 head(SchoolData)
-SchoolData %>% mutate(improvement=normexam-standlrt) %>% head
+tibble %>% mutate(total_length=2 * as.numeric(ReadLength)) %>% head
 ```
 
-## Pipe results to ggplot
+- Pipe results to ggplot
 ```{r}
 library(ggplot2)
-library(scales)
-library(RColorBrewer)
-require(grid)
-source("~/Documents/R/FormatGGplot.R")
 
-SchoolData %>% 
-  group_by(school) %>% 
-  summarise(mean=mean(normexam), se=sd(normexam)/sqrt(n())) %>% 
-  ggplot(aes(x=school, y=mean)) +
+tibble %>% 
+  group_by(Sex) %>% 
+  summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
+  ggplot(aes(x=Sex, y=mean)) +
     geom_bar(stat="identity", fill="royalblue4", alpha=1/2) +
-    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=1/2) +
-    fte_theme()
+    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=1/2)
 ```
 
-## Incorporate other datasets
+- Incorporate other datasets
 ```{r}
-SchoolData %>% 
-  group_by(school) %>% 
-  summarise(mean=mean(normexam), se=sd(normexam)/sqrt(n())) %>% 
-  ggplot(aes(x=school, y=mean)) +
-    geom_jitter(aes(x=school, y=normexam), alpha=1/10, 
+tibble %>% 
+  group_by(Sex) %>% 
+  summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
+  ggplot(aes(x=Sex, y=mean)) +
+    geom_jitter(aes(x=Sex, y=PCW), alpha=1/10, 
                 position = position_jitter(width = 0.2), 
-                colour="royalblue4", data=SchoolData) +
+                colour="royalblue4", data=tibble) +
     geom_point(stat="identity", alpha=2/3, shape=5, size=2, colour="royalblue4") +
     geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=2/3) +
     fte_theme()
 
 ```
 
-## Select top student in each shool 
-use row_number() if you want a single student per school
+- Select the highest RIN sample for each age 
+    - multiple results if tied; use row_number() if you want a single sample per age
+    
 ```{r}
-SchoolData %>% group_by(school) %>% filter(min_rank(desc(normexam)) == 1)
+tibble %>% group_by(PCW) %>% filter(min_rank(desc(RIN)) == 1)
 
 ```
 
-## Calculate schav from chapter 6
-dense_rank() assigns the same rank to ties but assigns consecutive ranks to different numbers. This gives consecutive ranks for each school.
+- Calculate deviation from sex-specific mean age for each sample
+
 ```{r}
-SchoolData %>% 
-  select(school, student, normexam, standlrt, schav) %>% 
-  group_by(school) %>% 
-  mutate(mean = mean(standlrt)) %>% 
+tibble %>% 
+  group_by(Sex) %>% 
+  mutate(mean = mean(PCW)) %>% 
   ungroup() %>% 
-  mutate(rank=dense_rank(desc(mean))) %>% 
-  mutate(schav2 = ifelse(rank < max(rank)/4, "high", ifelse(rank > max(rank) *3/4, "low", "mid")))
-
+  mutate(deviation=PCW-mean)
 ```
 
-## Plot minimum differences between students vs. scores
+- Combine dataframes
+    - works the same as merge, but a lot faster
+     
 ```{r}
-SchoolData %>% 
-  group_by(school) %>% 
-  arrange(desc(normexam)) %>% 
-  mutate(gap =  lag(normexam)- normexam) %>% 
-  ggplot(aes(y=gap, x=normexam)) + 
-  geom_point() +
-  fte_theme()
+counts<-read_tsv("Counts.txt")
 
+inner_join(tibble, counts, by=c("Sample" = "SampleID")) # keeps only rows common to both datasets
+left_join(tibble, counts, by=c("Sample" = "SampleID")) #keeps all rows in left dataframe, adding NA when row is missing from right dataset
+right_join(tibble, counts, by=c("Sample" = "SampleID")) #keeps all rows in right, adding NA when row is missing from left dataset
+full_join(tibble, counts, by=c("Sample" = "SampleID")) #keeps all rows in both, adding NA when row is missing from either dataset
 ```
 
-## Plot cumulative mean vs. number of students
+## stringr
+- package for string manipulation
+
+- extract fragment size estimate from homer peak calling
 ```{r}
-SchoolData %>% 
-  select(school, student, normexam) %>% 
-  group_by(school) %>% 
-  mutate(mean = cummean(normexam)) %>% 
-  ggplot(aes(x=student, y=mean, colour=factor(school))) + 
-    geom_point() + 
-    fte_theme()
-
+frag_size <- read_file("examples/peak_calling.txt") %>%
+  str_extract("(?<=fragment size = )\\d+") %>% 
+  as.numeric()
 ```
 
-## Reshaping data using tidyr
+## purrr
+- tidy version of the apply family
+- apply a function across subsets of a data frame (among other things)
+
+- correlate RIN vs mapping stats
 ```{r}
-library(tidyr)
-FakeData <- data.frame('Feature' = c('A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'), 
-            'variable' = rep(c("PercentDone", "Planned"), 4),
-            "value"=c(35, 50, 10, 80, 50, 75, 35, 40))
-FakeData
-FakeData %>%
-   spread(variable, value) %>% 
-   mutate(colour=ifelse(Planned-PercentDone <= 15, "Within 15%", ">15%")) %>% 
-   gather("variable", "value", 2:3) %>% 
-   mutate(colour = ifelse(variable == "Planned", "Plan", colour)) %>%
-   ggplot(aes(x=Feature, y=value, fill=relevel(factor(colour), ref="Plan"))) +
-     geom_bar(stat="identity", position="dodge") + 
-     fte_theme()
-
+inner_join(tibble, counts, by=c("Sample" = "SampleID")) %>%
+  gather(stat, value, 7:13) %>%
+  group_by(stat) %>%
+  nest() %>%
+  mutate(cor=map(data, ~cor.test(RIN, .$value)), r=map_dbl(cor, 4), p=map_dbl(cor, 3)) %>%
+  select(-data, -cor)
 ```
 
-## Combine dataframes
-works the same as merge, but a lot faster
-```{r}
-(df1 = data.frame(CustomerId = c(1:6), Product = c(rep("Toaster", 3), rep("Radio", 3))))
-(df2 = data.frame(CustomerId = c(2, 2, 4, 6, 7), State = c("Ohio", rep("Alabama", 2), rep("Ohio", 2))))
+## Useful resources
+[R for Data Science](http://r4ds.had.co.nz)
+[Tidyverse.org](https://www.tidyverse.org)
+[Rstudio data wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
-#Keep all rows in df1
-df1 %>% left_join(df2)
-merge(x=df1, y=df2, all.x=T)
-
-#Keep all rows in df2
-merge(x=df1, y=df2, all.y=T)
-df1 %>% right_join(df2)
-
-#Keep all rows in either
-merge(df1, df2, all=T)
-df1 %>% full_join(df2)
-
-#Keep only rows in both
-merge(df1, df2)
-df1 %>% inner_join(df2)
-```
-
-## Working with Databases
-By storing your data in a MySQL database, it's possible to work with extremely large datasets
-- 21.7 million blast results (1.2 Gb on file)
-```{r warning=FALSE}
-db <- src_mysql("test", user = "root", password = "", host='localhost')
-db %>% tbl("Blast") %>% filter(qseqid == 'KRAUScomp174846_c0_seq1_0374')
-db %>% tbl("Blast") %>% filter(hitlen > 2000) %>% select(qseqid, sseqid, pident)
-```
-
-*see the [Rstudio data wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 ## Alternatives to dplyr
 - ddply{plyr} (slow)
