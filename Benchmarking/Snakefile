@@ -23,6 +23,18 @@ rule fastqc:
     wrapper:
         "0.17.4/bio/fastqc"
 
+rule multiqc:
+    input:
+        expand("samtools_stats/{sample}.txt", sample=["a", "b"])
+    output:
+        "qc/multiqc.html"
+    params:
+        ""  # Optional: extra parameters for multiqc.
+    log:
+        "logs/multiqc.log"
+    wrapper:
+        "0.19.3/bio/multiqc"
+
 rule hisat:
     input:
         reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
