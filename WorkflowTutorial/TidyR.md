@@ -6,8 +6,22 @@
     - consistent output (type-stable, never makes assumptions about how you want to treat your data)
     - amenable to piping
 
-- Tidy data (AKA long data) vs. compact data (AKA wide):
+- Compact data (AKA wide) vs tidy data (AKA long data):
 
+| GeneID | Sample1 | Sample2 |
+| ------ | ------- | ------- |
+| Gene1  | 473     | 526     |
+| Gene2  | 7203    | 6405    |
+| Gene3  | 59487   | 51467   |
+
+| GeneID | Sample  | Count   |
+| ------ | ------- | ------- |
+| Gene1  | Sample1 | 473     |
+| Gene2  | Sample1 | 7203    |
+| Gene3  | Sample1 | 59487   |
+| Gene1  | Sample2 | 526     |
+| Gene2  | Sample2 | 6405    |
+| Gene3  | Sample2 | 51467   |
 
 - Each variable you measure should be in one column.
 - Each different observation of that variable should be in a different row.
@@ -82,6 +96,7 @@ separate(wide, Gene, c("GeneID", "Gene_name"))
     - group-wise summaries (group_by)
     
 - Select columns
+
 ```{r}
 head(tibble[,c('Sample', 'Sex')])
 select(SchoolData, Sample, Sex) %>% head
@@ -97,6 +112,7 @@ filter(tibble, PCW<14) %>% head
 ```
 
 - Sort
+
 ```{r}
 
 head(tibble[order(tibble$RIN),])
@@ -104,6 +120,7 @@ arrange(tibble, RIN) %>% head
 ```
 
 - Calculate group means
+
 ```{r}
 
 head(aggregate(PCW ~ Sex, data=tibble, FUN=function(x) av_score=mean(x)))
@@ -112,6 +129,7 @@ tibble %>% group_by(Sex) %>% summarise(av_age=mean(PCW)) %>% head
 ```
 
 - Calculate multiple stats
+
 ```{r}
 
 head(aggregate(RIN ~ Sex+PCW, data=tibble, FUN=function(x) c(mean=mean(x), var=var(x))))
@@ -119,12 +137,14 @@ tibble %>% group_by(Sex, PCW) %>% summarise(mean=mean(RIN), var=var(RIN)) %>% he
 ```
 
 - Count occurences per group
+
 ```{r}
 head(aggregate(RIN ~ Sex, data=tibble,  FUN=function(x) num_students=length(x)))
 tibble %>% group_by(Sex) %>% summarise(num_samples=n()) %>% head
 ```
 
 - Compute new values
+
 ```{r}
 tibble$total_length <- 2 * as.numeric(tibble$ReadLength)
 head(SchoolData)
@@ -132,29 +152,30 @@ tibble %>% mutate(total_length=2 * as.numeric(ReadLength)) %>% head
 ```
 
 - Pipe results to ggplot
+
 ```{r}
 library(ggplot2)
 
 tibble %>% 
-  group_by(Sex) %>% 
-  summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
-  ggplot(aes(x=Sex, y=mean)) +
-    geom_bar(stat="identity", fill="royalblue4", alpha=1/2) +
-    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=1/2)
+    group_by(Sex) %>% 
+    summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
+    ggplot(aes(x=Sex, y=mean)) +
+        geom_bar(stat="identity", fill="royalblue4", alpha=1/2) +
+        geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=1/2)
 ```
 
 - Incorporate other datasets
+
 ```{r}
 tibble %>% 
-  group_by(Sex) %>% 
-  summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
-  ggplot(aes(x=Sex, y=mean)) +
-    geom_jitter(aes(x=Sex, y=PCW), alpha=1/10, 
-                position = position_jitter(width = 0.2), 
-                colour="royalblue4", data=tibble) +
-    geom_point(stat="identity", alpha=2/3, shape=5, size=2, colour="royalblue4") +
-    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=2/3) +
-    fte_theme()
+    group_by(Sex) %>% 
+    summarise(mean=mean(PCW), se=sd(PCW)/sqrt(n())) %>% 
+    ggplot(aes(x=Sex, y=mean)) +
+        geom_jitter(aes(x=Sex, y=PCW), alpha=1/10, 
+                    position = position_jitter(width = 0.2), 
+                    colour="royalblue4", data=tibble) +
+        geom_point(stat="identity", alpha=2/3, shape=5, size=2, colour="royalblue4") +
+        geom_errorbar(aes(ymin=mean-se, ymax=mean+se), colour="royalblue4", alpha=2/3)
 
 ```
 
@@ -170,10 +191,10 @@ tibble %>% group_by(PCW) %>% filter(min_rank(desc(RIN)) == 1)
 
 ```{r}
 tibble %>% 
-  group_by(Sex) %>% 
-  mutate(mean = mean(PCW)) %>% 
-  ungroup() %>% 
-  mutate(deviation=PCW-mean)
+    group_by(Sex) %>% 
+    mutate(mean = mean(PCW)) %>% 
+    ungroup() %>% 
+    mutate(deviation=PCW-mean)
 ```
 
 - Combine dataframes
@@ -194,8 +215,8 @@ full_join(tibble, counts, by=c("Sample" = "SampleID")) #keeps all rows in both, 
 - extract fragment size estimate from homer peak calling
 ```{r}
 frag_size <- read_file("examples/peak_calling.txt") %>%
-  str_extract("(?<=fragment size = )\\d+") %>% 
-  as.numeric()
+    str_extract("(?<=fragment size = )\\d+") %>% 
+    as.numeric()
 ```
 
 ## purrr
@@ -205,17 +226,17 @@ frag_size <- read_file("examples/peak_calling.txt") %>%
 - correlate RIN vs mapping stats
 ```{r}
 inner_join(tibble, counts, by=c("Sample" = "SampleID")) %>%
-  gather(stat, value, 7:13) %>%
-  group_by(stat) %>%
-  nest() %>%
-  mutate(cor=map(data, ~cor.test(RIN, .$value)), r=map_dbl(cor, 4), p=map_dbl(cor, 3)) %>%
-  select(-data, -cor)
+    gather(stat, value, 7:13) %>%
+    group_by(stat) %>%
+    nest() %>%
+    mutate(cor=map(data, ~cor.test(RIN, .$value)), r=map_dbl(cor, 4), p=map_dbl(cor, 3)) %>%
+    select(-data, -cor)
 ```
 
 ## Useful resources
-[R for Data Science](http://r4ds.had.co.nz)
-[Tidyverse.org](https://www.tidyverse.org)
-[Rstudio data wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- [R for Data Science](http://r4ds.had.co.nz)
+- [Tidyverse.org](https://www.tidyverse.org)
+- [Rstudio data wrangling cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 
 ## Alternatives to dplyr
