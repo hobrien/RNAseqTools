@@ -1,5 +1,3 @@
-#snakemake --use-conda --cluster-config cluster_config.yaml --cluster "qsub -pe smp {cluster.num_cores} -l h_vmem={cluster.maxvmem}" -j 20
-
 import os
 # read config info into this namespace
 configfile: "config.yaml"
@@ -11,33 +9,33 @@ rule all:
         expand("{mapping_folder}/{sample}.sort.bam.bai", mapping_folder=config['mappings'], sample=config["samples"]),
         expand("{mapping_folder}/{sample}.sort.bam", mapping_folder=config['mappings'], sample=config["samples"]),
         os.path.join(config['mappings'], "BamQC.pdf"),
-        expand("FastQC/{sample}_R{read}.html", sample=config["samples"], read=[1,2]),
+        "qc/multiqc.html"
 
 rule fastqc:
     input:
-        lambda wildcards: config["samples"][wildcards.sample]['reads']['read']
+        lambda wildcards: config["samples"][wildcards.sample]['reads'][int(wildcards.read)-1]
     output:
-        html="FastQC/{sample}_R{read}.html",
-        zip="FastQC/{sample}_R{read}.zip"
+        html="FastQC/{sample}_R{read}_fastqc.html",
+        zip="FastQC/{sample}_R{read}_fastqc.zip"
     params: ""
     wrapper:
         "0.17.4/bio/fastqc"
 
 rule multiqc:
     input:
-        expand("samtools_stats/{sample}.txt", sample=["a", "b"])
+        expand("FastQC/{sample}_R{read}_fastqc.html", sample=config["samples"], read=[1,2]),
     output:
         "qc/multiqc.html"
     params:
         ""  # Optional: extra parameters for multiqc.
     log:
-        "logs/multiqc.log"
+        "Logs/MultiQC/multiqc.log"
     wrapper:
         "0.19.3/bio/multiqc"
 
 rule hisat:
     input:
-        reads = lambda wildcards: config["samples"][wildcards.sample]['reads'].split(',')
+        reads = lambda wildcards: config["samples"][wildcards.sample]['reads']
     output:
         temp("{mapping_folder}/{sample}.bam")
     params:

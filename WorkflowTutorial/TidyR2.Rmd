@@ -1,0 +1,37 @@
+---
+title: "The Tidyverse"
+output:
+  html_document:
+    df_print: paged
+---
+
+- The Tidyverse is a collection of R packages for manipulating tidy data
+- They do not necessarily extend functionality beyond base R but they do make things easier and faster:
+    - consistent syntax
+    - consistent output
+    - amenable to piping
+
+- Tidy data (AKA long data) vs. compact data (AKA wide)
+```{r echo = FALSE}
+library(tibble)
+suppressWarnings(library(tidyr))
+
+wide <-tribble(
+  ~Gene, ~Sample1,  ~Sample2,
+  "Gene1", 473,  526,
+  "Gene2", 7203,  6405,
+  "Gene3", 59487, 51467
+)
+long <- gather(wide, "Sample", "Value", -Gene)
+wide
+long
+```
+
+- Each variable you measure should be in one column.
+- Each different observation of that variable should be in a different row.
+- There should be one table for each "kind" of variable.
+- If you have multiple tables, they should include a column in the table that allows them to be linked.
+
+# readr/tibble
+
+
