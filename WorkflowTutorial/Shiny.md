@@ -94,11 +94,11 @@ output$Plot1<- renderPlot({
     - tables can be searched and sorted by any column
     - supports selection of single rows/ranges of rows
         - selected row number(s) available as an input
-    ```  
-    output$Table1 <- DT::renderDataTable({
+```  
+output$Table1 <- DT::renderDataTable({
       DT::datatable(table1, caption = 'Big ass table of results')
-  })
-  ```
+})
+```
   
 - [shinyBS](https://ebailey78.github.io/shinyBS):
     - `bsCollapse` creates collapsable panels
@@ -145,7 +145,8 @@ genotypes <- system(paste("bcftools view -H -r", snp_pos, "./Data/combined_filte
     - free option that will break quite quickly if your app becomes popular (5 apps/25 hours per month), as well as payed options with higher capacity
 - ShinyServer
     - locally hosted (specifically, in Mark's office)
-    - 
+    - allows more flexibility to include external tools and databases (though database servers can be accessed from ShinyApps.io) 
 - GitHub
     - requires your audience to have RStudio, but combined with private repos, would allow you to control access
+    - there is a `runGitHub` function that allows apps to be run directly from github, but I'm not sure if it would work with a private repo
     
