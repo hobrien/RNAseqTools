@@ -1,4 +1,6 @@
-# Hello Shiny
+# Shiny Web Apps
+
+## Hello Shiny
 ```{r}
 library(shiny)
 runExample("01_hello")
@@ -24,7 +26,7 @@ runExample("01_hello")
 
 ## A simple example 
 - see [here](https://github.com/hobrien/GENEX-FB1/tree/master/Shiny/GENEX-FB1) for a more complex example that illustrates many of the features discussed here
-```{r}
+```
 library(shiny)
 ui <- fluidPage(
   titlePanel("Hello Shiny!"),
@@ -71,20 +73,20 @@ observe({
 
 - `req` can be used prevent rendering output until input has been selected
 ```
-utput$Plot1 <- renderPlot({
+output$Plot1 <- renderPlot({
     req(input$geneID)
     MakePlot(input$geneID , table1)
-  })
+})
 ```
 
 - `validate` can be used to raise an error if inputs are incorrect
 ```
-  output$Plot1<- renderPlot({
+output$Plot1<- renderPlot({
     validate(
       need(input$Table1_rows_selected != "", "Please select a row from the table")
     )
     MakePlot(input$Table1_rows_selected , table1)
-  })
+})
 ```
 ## Useful packages
 - [DT](https://shiny.rstudio.com/articles/datatables.html): render fancy tables using [DataTables](https://datatables.net) jquery library
@@ -131,6 +133,7 @@ output$plot <- renderPlot({
     - data can be stored in a [database](https://shiny.rstudio.com/articles/overview.html) and retrieved as needed
     - Use external tools (tabix, bedtools, samtools) to index data on disk
         - tabix supports bedfiles with arbitrary numbers of columns after three interval columns
+
 ```
 genotypes <- system(paste("bcftools view -H -r", snp_pos, "./Data/combined_filtered.vcf.gz"), intern=TRUE) %>%
     str_split('\t')
@@ -141,6 +144,7 @@ genotypes <- system(paste("bcftools view -H -r", snp_pos, "./Data/combined_filte
     - free option that will break quite quickly if your app becomes popular (5 apps/25 hours per month), as well as payed options with higher capacity
 - ShinyServer
     - locally hosted (specifically, in Mark's office)
+    - 
 - GitHub
     - requires your audience to have RStudio, but combined with private repos, would allow you to control access
     
